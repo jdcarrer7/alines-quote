@@ -3,42 +3,96 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyFynd — Custom Quote for Aline</title>
+  <title data-i18n="meta.title">Skyfynd — Custom Quote for Aline</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
     :root {
-      --bg-primary: #0a0a0a;
-      --bg-secondary: #131017;
-      --bg-card: #1c1825;
-      --bg-card-hover: #2a2435;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.18);
-      --text-primary: #ffffff;
-      --text-secondary: #a8a3b3;
-      --text-muted: #6b6577;
-      --text-strike: #5a5466;
-      --accent-purple: #8b5cf6;
-      --accent-pink: #ec4899;
-      --accent-orange: #f59e0b;
-      --accent-green: #10b981;
-      --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #d946ef 50%, #ec4899 100%);
-      --gradient-warm: linear-gradient(135deg, #f59e0b 0%, #ec4899 100%);
+      /* Skyfynd dark palette */
+      --bg-primary: #0A0A0B;
+      --bg-secondary: #111113;
+      --bg-card: #18181B;
+      --bg-card-hover: #1C1C1F;
+      --bg-elevated: #27272A;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-light: rgba(255, 255, 255, 0.1);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --border-accent: rgba(139, 92, 246, 0.3);
+      --text-primary: #FAFAFA;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --text-strike: #52525B;
+      /* Skyfynd accent colors */
+      --accent-purple: #8B5CF6;
+      --accent-purple-light: #A78BFA;
+      --accent-blue: #3B82F6;
+      --accent-blue-light: #60A5FA;
+      --accent-teal: #10B981;
+      --accent-amber: #F59E0B;
+      --accent-orange: #F97316;
+      --accent-red: #EF4444;
+      --accent-pink: #10B981;
+      --accent-green: #10B981;
+      --gradient-primary: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #10B981 100%);
+      --gradient-warm: linear-gradient(135deg, #F59E0B 0%, #F97316 50%, #EF4444 100%);
+      --gradient-nav-glow: linear-gradient(135deg, #60A5FA, #10B981, #FBBF24, #F97316, #EF4444, #60A5FA);
+      --gradient-soft: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.12) 50%, rgba(16, 185, 129, 0.15) 100%);
+      --font-serif: 'Source Serif Pro', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
     }
     * { box-sizing: border-box; }
-    html, body { background: var(--bg-primary); color: var(--text-primary); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
-    body { background-image: radial-gradient(800px circle at 10% -10%, rgba(139, 92, 246, 0.15), transparent 40%), radial-gradient(700px circle at 90% 10%, rgba(236, 72, 153, 0.12), transparent 40%); background-attachment: fixed; }
-    .font-serif { font-family: 'Playfair Display', serif; }
-    .gradient-text { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .gradient-warm-text { background: var(--gradient-warm); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 20px; transition: all 0.25s ease; }
-    .card:hover { border-color: var(--border-strong); background: var(--bg-card-hover); transform: translateY(-2px); }
-    .card-selected { border-color: var(--accent-purple); box-shadow: 0 0 0 1px var(--accent-purple), 0 12px 40px -10px rgba(139, 92, 246, 0.35); background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(236, 72, 153, 0.04)); }
-    .badge-recommended { background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(236, 72, 153, 0.2)); border: 1px solid rgba(245, 158, 11, 0.4); color: #fbbf24; }
-    .badge-promo { background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(236, 72, 153, 0.25)); border: 1px solid rgba(236, 72, 153, 0.5); color: #fbcfe8; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    html, body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing: -0.01em; }
+    body { font-size: 17px; line-height: 1.6; }
+    body > * { position: relative; z-index: 1; }
+
+    /* === Skyfynd FloatingStars === */
+    #starfield { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    #starfield .star { position: absolute; border-radius: 50%; pointer-events: none; }
+    #starfield .nebula { position: absolute; border-radius: 50%; pointer-events: none; }
+    @keyframes starFloat {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.15; }
+      50%      { transform: translateY(-6px) scale(1.05); opacity: 0.4; }
+    }
+    @keyframes starTwinkle {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.1; box-shadow: 0 0 1px rgba(255,255,255,0.15); }
+      25%      { opacity: 0.2; }
+      50%      { transform: translateY(-5px) scale(1.4); opacity: 0.9; box-shadow: 0 0 6px rgba(255,255,255,0.5), 0 0 12px rgba(200,220,255,0.25); }
+      75%      { opacity: 0.2; }
+    }
+    @keyframes accentPulse {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50%      { transform: scale(1.6); opacity: 0.8; }
+    }
+    @keyframes nebulaShift {
+      0%, 100% { opacity: 0.03; transform: scale(1) rotate(0deg); }
+      33%      { opacity: 0.06; transform: scale(1.05) rotate(2deg); }
+      66%      { opacity: 0.04; transform: scale(0.98) rotate(-1deg); }
+    }
+    .font-serif { font-family: var(--font-serif) !important; font-weight: 600 !important; letter-spacing: -0.02em; }
+    .font-serif.font-bold, .font-bold.font-serif { font-weight: 600 !important; }
+    .wordmark { font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.5px; line-height: 1.4; }
+    h1.font-serif, h2.font-serif, h3.font-serif, h4.font-serif { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.02em; }
+    .gradient-text { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+    .gradient-warm-text { background: var(--gradient-warm); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+    .card {
+      background: linear-gradient(135deg, rgba(17, 17, 19, 0.95) 0%, rgba(24, 24, 27, 0.9) 100%);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card:hover { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 0 32px rgba(59, 130, 246, 0.08); transform: translateY(-2px); }
+    .card-selected {
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.25), 0 12px 40px -10px rgba(59, 130, 246, 0.25);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.05) 50%, rgba(16, 185, 129, 0.06));
+    }
+    .badge-recommended { background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15)); border: 1px solid rgba(139, 92, 246, 0.35); color: #A78BFA; }
+    .badge-promo { background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(16, 185, 129, 0.18)); border: 1px solid rgba(96, 165, 250, 0.45); color: #BAE6FD; }
     .strike { text-decoration: line-through; color: var(--text-strike); }
     .price-tag { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
     .toggle { width: 48px; height: 26px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-subtle); position: relative; cursor: pointer; transition: all 0.25s ease; flex-shrink: 0; }
@@ -53,69 +107,561 @@
     .line-item:last-child { border-bottom: none; }
     .line-label { color: var(--text-secondary); }
     .line-value { color: var(--text-primary); font-weight: 500; }
-    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); } 50% { box-shadow: 0 0 0 12px rgba(139, 92, 246, 0); } }
-    .pulse { animation: pulse-glow 2.5s infinite; }
-    .savings-shimmer { background: linear-gradient(90deg, #10b981, #34d399, #10b981); background-size: 200% 100%; animation: shimmer 3s linear infinite; -webkit-background-clip: text; background-clip: text; color: transparent; }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 24px rgba(59, 130, 246, 0.35), 0 0 0 0 rgba(139, 92, 246, 0.45); } 50% { box-shadow: 0 0 48px rgba(16, 185, 129, 0.3), 0 0 0 12px rgba(139, 92, 246, 0); } }
+    .pulse { animation: pulse-glow 3s ease-in-out infinite; }
+    .savings-shimmer { background: linear-gradient(90deg, #10B981, #60A5FA, #A78BFA, #10B981); background-size: 200% 100%; animation: shimmer 3s linear infinite; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     .fade-in { animation: fade-in 0.4s ease-out; }
     @keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .glow-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4; pointer-events: none; }
     details > summary { list-style: none; cursor: pointer; }
     details > summary::-webkit-details-marker { display: none; }
     details[open] .chev { transform: rotate(180deg); }
     .chev { transition: transform 0.25s ease; }
     [data-icon] { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; }
+
+    /* Hero centering — only when timeline panel is open AND visible */
+    .hero-content { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+    .hero-row { display: flex; align-items: center; gap: 20px; flex-direction: row; }
+    .hero-intro { margin-left: 0; margin-right: 0; }
+    .hero-pills { justify-content: flex-start; }
+    @media (min-width: 1280px) {
+      body:not(.journey-collapsed) .hero-content { align-items: center; text-align: center; transition: align-items 0.4s ease; }
+      body:not(.journey-collapsed) .hero-intro { margin-left: auto; margin-right: auto; }
+      body:not(.journey-collapsed) .hero-pills { justify-content: center; }
+    }
+
+    /* === Case-study expansion from AI Receptionist card === */
+    .case-trigger {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px;
+      padding: 8px 14px;
+      font-size: 12px; font-weight: 600;
+      color: var(--accent-purple-light);
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(59, 130, 246, 0.14), rgba(16, 185, 129, 0.14));
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      border-radius: 9999px;
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.25), 0 0 32px rgba(59, 130, 246, 0.1);
+      animation: caseGlow 3s ease-in-out infinite;
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), border-color 0.25s ease, color 0.2s ease;
+    }
+    @keyframes caseGlow {
+      0%, 100% { box-shadow: 0 0 18px rgba(139, 92, 246, 0.25), 0 0 32px rgba(59, 130, 246, 0.1); }
+      50%      { box-shadow: 0 0 24px rgba(167, 139, 250, 0.45), 0 0 44px rgba(96, 165, 250, 0.2); }
+    }
+    .case-trigger .case-chev { transition: transform 0.3s ease; }
+    .case-trigger:hover {
+      color: #DDD6FE;
+      transform: translateY(-1px);
+      border-color: rgba(167, 139, 250, 0.55);
+    }
+    .case-trigger.active { border-color: rgba(167, 139, 250, 0.6); }
+    .case-trigger.active .case-chev { transform: rotate(180deg); }
+
+    .case-expand {
+      position: relative;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      margin-top: 0;
+      transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease, margin-top 0.3s ease;
+    }
+    .case-expand.open {
+      max-height: 1400px;
+      opacity: 1;
+      margin-top: 22px;
+    }
+    .case-expand .notch {
+      position: absolute;
+      top: 13px; left: 50%; transform: translateX(-50%) rotate(45deg);
+      width: 18px; height: 18px;
+      background: linear-gradient(135deg, rgba(17,17,19,0.95) 0%, rgba(24,24,27,0.9) 100%);
+      border-left: 1px solid rgba(139,92,246,0.35);
+      border-top: 1px solid rgba(139,92,246,0.35);
+      z-index: 2;
+    }
+    .case-expand-inner {
+      position: relative;
+      margin-top: 10px;
+      padding: 28px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(17,17,19,0.95) 0%, rgba(24,24,27,0.9) 100%);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(139,92,246,0.25);
+      box-shadow: 0 12px 40px -10px rgba(139,92,246,0.2);
+    }
+    .case-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-muted);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .case-close:hover { background: rgba(139,92,246,0.15); color: #C4B5FD; border-color: rgba(139,92,246,0.35); }
+
+    /* === Business-card samples expansion === */
+    .samples-trigger {
+      display: inline-flex; align-items: center; gap: 6px;
+      width: 100%; justify-content: center;
+      margin-top: 14px;
+      padding: 9px 14px;
+      font-size: 12px; font-weight: 600;
+      color: var(--accent-purple-light);
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(59, 130, 246, 0.08));
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 10px;
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    .samples-trigger:hover { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.15)); border-color: rgba(167,139,250,0.5); color: #DDD6FE; transform: translateY(-1px); }
+    .samples-trigger .samples-chev { transition: transform 0.3s ease; }
+    .samples-trigger.active .samples-chev { transform: rotate(180deg); }
+    .samples-expand {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      margin-top: 0;
+      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease, margin-top 0.3s ease;
+    }
+    .samples-expand.open {
+      max-height: 800px;
+      opacity: 1;
+      margin-top: 14px;
+    }
+    .samples-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+    .sample-thumb {
+      position: relative; display: block;
+      border-radius: 10px; overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      aspect-ratio: 4/3;
+      cursor: zoom-in;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .sample-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .sample-thumb:hover { border-color: rgba(167,139,250,0.5); box-shadow: 0 8px 24px rgba(139,92,246,0.18); transform: translateY(-1px); }
+    .sample-thumb:hover img { transform: scale(1.04); }
+    .samples-caption { font-size: 10.5px; color: var(--text-muted); margin-top: 8px; line-height: 1.4; }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 200; padding: 24px; cursor: zoom-out; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: min(1200px, 90vw); max-height: 88vh; border-radius: 12px; box-shadow: 0 32px 80px rgba(0,0,0,0.5); }
+
+    /* === Journey timeline panel — Skyfynd project-page style === */
+    :root { --journey-w: 300px; }
+    @media (min-width: 1280px) {
+      body { padding-left: var(--journey-w); transition: padding-left 0.45s cubic-bezier(0.4,0,0.2,1); }
+      body.journey-collapsed { padding-left: 0; }
+    }
+    .journey-panel {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: var(--journey-w);
+      z-index: 50;
+      display: flex; flex-direction: column;
+      background: linear-gradient(180deg, rgba(8,8,10,0.96) 0%, rgba(14,14,17,0.95) 100%);
+      backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .journey-panel.collapsed { transform: translateX(-100%); }
+    @media (max-width: 1279px) { .journey-panel { display: none; } }
+    /* Subtle vertical accent line along the right edge */
+    .journey-panel::after {
+      content: '';
+      position: absolute; right: -1px; top: 8%; bottom: 8%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(139,92,246,0.35) 30%, rgba(59,130,246,0.25) 60%, rgba(16,185,129,0.3) 90%, transparent);
+      pointer-events: none;
+    }
+
+    /* Top header */
+    .journey-head {
+      padding: 22px 22px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .journey-head-row { display: flex; align-items: center; gap: 12px; }
+    .journey-head .icon-wrap {
+      width: 34px; height: 34px; border-radius: 10px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(139,92,246,0.22), rgba(59,130,246,0.18), rgba(16,185,129,0.18));
+      border: 1px solid rgba(139,92,246,0.3);
+      color: #C4B5FD;
+      flex-shrink: 0;
+    }
+    .journey-title {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .journey-sub {
+      font-size: 11.5px; color: var(--text-muted);
+      line-height: 1.55; margin-top: 12px;
+    }
+    .journey-collapse {
+      position: absolute; top: 22px; right: 18px;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-muted);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .journey-collapse:hover {
+      background: rgba(139,92,246,0.12);
+      color: #C4B5FD;
+      border-color: rgba(139,92,246,0.35);
+    }
+
+    /* Scroll body */
+    .journey-body {
+      flex: 1; min-height: 0;
+      overflow-y: auto;
+      padding: 4px 8px 24px;
+    }
+    .journey-body::-webkit-scrollbar { width: 4px; }
+    .journey-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+    /* Section (one per phase) */
+    .phase-section {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .phase-section:last-child { border-bottom: none; }
+    .phase-section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px;
+      padding: 18px 14px 14px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .phase-section-header:hover { background: rgba(255,255,255,0.02); }
+    .phase-section-header .left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .phase-marker {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(167,139,250,0.55);
+      box-shadow: 0 0 0 3px rgba(167,139,250,0.1);
+      flex-shrink: 0;
+    }
+    .phase-section.is-current .phase-marker {
+      background: #A78BFA;
+      box-shadow: 0 0 0 3px rgba(167,139,250,0.18), 0 0 12px rgba(139,92,246,0.5);
+      animation: dotPulse 2.6s ease-in-out infinite;
+    }
+    .phase-section.is-next .phase-marker { background: #60A5FA; box-shadow: 0 0 0 3px rgba(96,165,250,0.12); }
+    .phase-section.is-future .phase-marker { background: #34D399; box-shadow: 0 0 0 3px rgba(52,211,153,0.12); }
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(167,139,250,0.18), 0 0 12px rgba(139,92,246,0.5); }
+      50%      { box-shadow: 0 0 0 5px rgba(167,139,250,0.08), 0 0 20px rgba(139,92,246,0.65); }
+    }
+    .phase-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #fff;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .phase-section.is-next .phase-label { color: #E4E4E7; }
+    .phase-section.is-future .phase-label { color: #D4D4D8; }
+    .phase-badge-tag {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .phase-section.is-current .phase-badge-tag { background: rgba(139,92,246,0.18); border: 1px solid rgba(167,139,250,0.35); color: #C4B5FD; }
+    .phase-section.is-next .phase-badge-tag    { background: rgba(59,130,246,0.12); border: 1px solid rgba(96,165,250,0.3); color: #93C5FD; }
+    .phase-section.is-future .phase-badge-tag  { background: rgba(16,185,129,0.1); border: 1px solid rgba(52,211,153,0.3); color: #6EE7B7; }
+    .phase-section-header .chev {
+      color: var(--text-muted);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .phase-section.collapsed .phase-section-header .chev { transform: rotate(-90deg); }
+
+    .phase-body {
+      padding: 0 14px 18px 32px;
+      overflow: hidden;
+      max-height: 800px;
+      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+    }
+    .phase-section.collapsed .phase-body {
+      max-height: 0;
+      opacity: 0;
+      padding-top: 0; padding-bottom: 0;
+    }
+    .phase-context {
+      font-size: 11px; color: var(--text-muted);
+      font-style: italic; margin-bottom: 10px;
+      line-height: 1.45;
+    }
+    .phase-recs-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; font-weight: 600;
+      color: var(--text-muted);
+      margin: 4px 0 8px;
+    }
+    .phase-recs-label::before {
+      content: ''; display: inline-block;
+      width: 14px; height: 1px;
+      background: currentColor; opacity: 0.45;
+    }
+    .phase-recs-label .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(167,139,250,0.75);
+      box-shadow: 0 0 6px rgba(167,139,250,0.45);
+    }
+    .phase-section.is-next .phase-recs-label .dot   { background: rgba(96,165,250,0.75); box-shadow: 0 0 6px rgba(96,165,250,0.45); }
+    .phase-section.is-future .phase-recs-label .dot { background: rgba(52,211,153,0.75); box-shadow: 0 0 6px rgba(52,211,153,0.45); }
+    .phase-list { list-style: none; padding: 0; margin: 0; }
+    .phase-list li {
+      position: relative;
+      padding: 6px 0 6px 16px;
+      font-size: 13px; line-height: 1.45;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+    /* Bullet dot — color matches the phase accent */
+    .phase-list li::before {
+      content: '';
+      position: absolute;
+      left: 3px; top: 13px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(167,139,250,0.55);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .phase-section.is-current .phase-list li { color: #E4E4E7; }
+    .phase-section.is-current .phase-list li::before {
+      background: #A78BFA;
+      box-shadow: 0 0 6px rgba(167,139,250,0.5);
+    }
+    .phase-section.is-next .phase-list li::before   { background: rgba(96,165,250,0.65); }
+    .phase-section.is-future .phase-list li::before { background: rgba(52,211,153,0.65); }
+    .phase-list li:hover { color: var(--text-primary); }
+    .phase-list li:hover::before { transform: scale(1.4); }
+
+    /* Footer attribution */
+    .journey-foot {
+      padding: 14px 22px 18px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .journey-foot i { opacity: 0.6; }
+
+    /* Collapsed tab — slim vertical edge button */
+    .journey-tab {
+      position: fixed; left: 0; top: 50%;
+      transform: translateY(-50%) translateX(-100%);
+      z-index: 50;
+      background: linear-gradient(135deg, rgba(139,92,246,0.92), rgba(59,130,246,0.85), rgba(16,185,129,0.85));
+      color: #fff;
+      padding: 16px 9px;
+      border-radius: 0 12px 12px 0;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-left: none;
+      cursor: pointer;
+      writing-mode: vertical-rl;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.4);
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), padding 0.25s ease, filter 0.25s ease;
+    }
+    .journey-tab:hover { padding-left: 14px; filter: brightness(1.1); }
+    .journey-tab.visible { transform: translateY(-50%) translateX(0); }
+    .journey-tab i { writing-mode: horizontal-tb; }
+    @media (max-width: 1279px) { .journey-tab { display: none; } }
+
+    /* === Language switcher === */
+    .lang-pill {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px;
+      border-radius: 9999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 26px; line-height: 1;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+      font-family: 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji', sans-serif;
+    }
+    .lang-pill:hover { transform: translateY(-2px) scale(1.05); border-color: rgba(139,92,246,0.4); box-shadow: 0 6px 20px rgba(59,130,246,0.18); }
+    .lang-pill.active {
+      background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(59,130,246,0.22), rgba(16,185,129,0.22));
+      border-color: rgba(139,92,246,0.6);
+      box-shadow: 0 0 0 2px rgba(139,92,246,0.25), 0 0 22px rgba(59,130,246,0.3);
+    }
+    .lang-switch { display: inline-flex; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 9999px; background: rgba(10,10,11,0.5); border: 1px solid rgba(255,255,255,0.08); }
+    .lang-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 8px 0 4px;
+    }
+    .lang-label i { color: var(--accent-purple-light); }
   </style>
 </head>
 <body class="min-h-screen">
 
-  <!-- ============================ NAV ============================ -->
-  <nav class="border-b border-white/5 backdrop-blur-md bg-black/40 sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: var(--gradient-primary);">
-          <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
-        </div>
-        <div>
-          <div class="text-lg font-bold font-serif tracking-tight">SkyFynd</div>
-          <div class="text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Creative · Digital · AI</div>
-        </div>
+  <!-- ============================ FLOATING STARS (Skyfynd) ============================ -->
+  <div id="starfield" aria-hidden="true"></div>
+
+  <!-- ============================ JOURNEY TIMELINE (left rail) ============================ -->
+  <aside id="journey-panel" class="journey-panel" aria-label="Aline's business journey">
+    <div class="journey-head">
+      <button class="journey-collapse" id="journey-close" aria-label="Hide journey">
+        <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+      </button>
+      <div class="journey-head-row">
+        <span class="icon-wrap"><i data-lucide="route" class="w-4 h-4"></i></span>
+        <span class="journey-title" data-i18n="journey.title">Aline's Cleaning Journey</span>
       </div>
-      <div class="text-right hidden sm:block">
-        <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Quote #SF-2026-0511-AL</div>
-        <div class="text-xs text-[var(--text-secondary)]">Issued May 11, 2026 · Valid 30 days</div>
+      <p class="journey-sub" data-i18n="journey.sub">Our read on your business — services framed around each stage you're growing through.</p>
+    </div>
+
+    <div class="journey-body">
+      <!-- Phase 1 -->
+      <section class="phase-section is-current" data-phase="1">
+        <header class="phase-section-header">
+          <div class="left">
+            <span class="phase-marker"></span>
+            <span class="phase-label" data-i18n="journey.p1.title">Phase 1 — Foundation</span>
+          </div>
+          <span class="phase-badge-tag" data-i18n="journey.now">Now</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 chev"></i>
+        </header>
+        <div class="phase-body">
+          <div class="phase-context" data-i18n="journey.p1.context">Independent owner · 17 houses</div>
+          <div class="phase-recs-label"><span class="dot"></span><span data-i18n="journey.recsLabel">Skyfynd's recommended steps</span></div>
+          <ul class="phase-list">
+            <li data-i18n="journey.p1.g1">Register LLC</li>
+            <li data-i18n="journey.p1.g2">Issue EIN</li>
+            <li data-i18n="journey.p1.g3">Get business insured</li>
+            <li data-i18n="journey.p1.g4">Reach 40 clients</li>
+            <li data-i18n="journey.p1.g5">Strategize first hire position</li>
+            <li data-i18n="journey.p1.g6">Business bank account</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Phase 2 -->
+      <section class="phase-section is-next" data-phase="2">
+        <header class="phase-section-header">
+          <div class="left">
+            <span class="phase-marker"></span>
+            <span class="phase-label" data-i18n="journey.p2.title">Phase 2 — Growth</span>
+          </div>
+          <span class="phase-badge-tag" data-i18n="journey.next">Next</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 chev"></i>
+        </header>
+        <div class="phase-body">
+          <div class="phase-context" data-i18n="journey.p2.context">Building a small team at 30–40 recurring clients</div>
+          <div class="phase-recs-label"><span class="dot"></span><span data-i18n="journey.recsLabel">Skyfynd's recommended steps</span></div>
+          <ul class="phase-list">
+            <li data-i18n="journey.p2.g1">Start hiring</li>
+            <li data-i18n="journey.p2.g2">Insurance for 1099 contractors vs. SSN/employees</li>
+            <li data-i18n="journey.p2.g3">Recurring client retention &amp; reviews</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Phase 3 -->
+      <section class="phase-section is-future" data-phase="3">
+        <header class="phase-section-header">
+          <div class="left">
+            <span class="phase-marker"></span>
+            <span class="phase-label" data-i18n="journey.p3.title">Phase 3 — Scale</span>
+          </div>
+          <span class="phase-badge-tag" data-i18n="journey.future">Future</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 chev"></i>
+        </header>
+        <div class="phase-body">
+          <div class="phase-context" data-i18n="journey.p3.context">Multi-area &amp; premium tiers</div>
+          <div class="phase-recs-label"><span class="dot"></span><span data-i18n="journey.recsLabel">Skyfynd's recommended steps</span></div>
+          <ul class="phase-list">
+            <li data-i18n="journey.p3.g1">Expand to neighboring service areas</li>
+            <li data-i18n="journey.p3.g2">Premium deep-clean &amp; move-out tiers</li>
+            <li data-i18n="journey.p3.g3">Branded fleet &amp; uniforms</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <div class="journey-foot">
+      <i data-lucide="sparkles" class="w-3 h-3"></i>
+      <span data-i18n="journey.foot">Skyfynd · prepared for Aline</span>
+    </div>
+  </aside>
+
+  <button id="journey-tab" class="journey-tab" aria-label="Show journey">
+    <i data-lucide="route" class="w-3.5 h-3.5"></i>
+    <span data-i18n="journey.tab">Aline's Cleaning Journey</span>
+  </button>
+
+  <!-- ============================ NAV ============================ -->
+  <nav class="sticky top-0 z-40" style="border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(10, 10, 11, 0.85); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      <a href="https://www.skyfynd.io" class="flex items-center gap-3 no-underline" style="text-decoration: none; color: inherit;">
+        <img src="skyfynd-logo.png" alt="Skyfynd logo" class="w-10 h-10 flex-shrink-0" style="object-fit:contain;" />
+        <div>
+          <div class="text-[20px] wordmark">Skyfynd</div>
+          <div class="text-[10px] uppercase tracking-widest text-[var(--text-muted)]" data-i18n="nav.tagline">Creative · Digital · AI</div>
+        </div>
+      </a>
+      <div class="flex items-center gap-5">
+        <div class="text-right hidden sm:block">
+          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider" data-i18n="nav.quoteNum">Quote #SF-2026-0512-AL</div>
+          <div class="text-xs text-[var(--text-secondary)]" data-i18n="nav.issued">Issued May 12, 2026 · Valid 30 days</div>
+        </div>
+        <div class="lang-switch" role="group" aria-label="Language selector">
+          <span class="lang-label" aria-hidden="true">
+            <i data-lucide="languages" class="w-4 h-4"></i>
+            <span data-i18n="nav.translate">Translate</span>
+          </span>
+          <button class="lang-pill active" data-lang="en" aria-label="English (United States)" title="English">🇺🇸</button>
+          <button class="lang-pill" data-lang="pt" aria-label="Português (Brasil)" title="Português">🇧🇷</button>
+        </div>
       </div>
     </div>
   </nav>
 
   <!-- ============================ HERO ============================ -->
   <section class="relative max-w-6xl mx-auto px-6 pt-16 pb-12">
-    <div class="glow-orb w-[300px] h-[300px] -top-10 -left-20" style="background: var(--accent-purple);"></div>
-    <div class="glow-orb w-[260px] h-[260px] top-10 right-0" style="background: var(--accent-pink);"></div>
-
-    <div class="relative">
-      <span class="pill badge-promo mb-6">
-        <i data-lucide="gift" class="w-3 h-3"></i> Aline's Welcome Promotion
-      </span>
-      <h1 class="text-5xl sm:text-6xl font-bold font-serif leading-tight mb-6">
-        A custom plan to grow<br />
-        <span class="gradient-text">Aline's cleaning service</span>
+    <div class="relative hero-content">
+      <div class="hero-row mb-8">
+        <img src="skyfynd-logo.png" alt="Skyfynd logo" class="w-16 h-16 flex-shrink-0" style="object-fit:contain; filter: drop-shadow(0 0 24px rgba(59, 130, 246, 0.25));" />
+        <span class="pill badge-promo">
+          <i data-lucide="gift" class="w-3 h-3"></i> <span data-i18n="hero.promo">Aline's Welcome Promotion</span>
+        </span>
+      </div>
+      <h1 class="font-serif leading-tight mb-6" style="font-size: clamp(36px, 7vw, 56px); font-weight: 600; line-height: 1.05; letter-spacing: -0.03em;">
+        <span data-i18n="hero.h1.pre">A custom plan to grow</span><br />
+        <span class="gradient-text">Aline's Cleaning</span>
       </h1>
-      <p class="text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
-        Hi Aline — based on our conversation, we put together a tailored package designed to help you
-        capture more leads, save hours on phone calls, and look unmistakably professional online.
-        Everything below is yours to customize. Toggle services on or off and watch your total update in real time.
+      <p class="hero-intro text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed" data-i18n="hero.intro">
+        Hi Aline, we've built this custom proposal for your website based on our conversation. We've also suggested a few extra services you can pursue—either now or down the road—to help you capture more leads, save time answering calls, and polish your brand online. You can easily adjust the services below; just check or uncheck the boxes to see how it changes the total.
+      </p>
+      <p class="hero-intro mt-3 text-sm text-[var(--text-muted)] max-w-2xl leading-relaxed italic" data-i18n="hero.intro.firstYear">
+        Heads up: the discounted prices below are your welcome-promotion rate for the first year. Standard rates (shown crossed out) apply on renewal.
       </p>
 
-      <div class="mt-8 flex flex-wrap items-center gap-3 text-sm text-[var(--text-secondary)]">
+      <div class="hero-pills mt-8 flex flex-wrap items-center gap-3 text-sm text-[var(--text-secondary)]">
         <span class="pill" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399;">
-          <i data-lucide="check-circle-2" class="w-3 h-3"></i> No commitment
+          <i data-lucide="check-circle-2" class="w-3 h-3"></i> <span data-i18n="hero.pill.noCommitment">No commitment</span>
         </span>
         <span class="pill" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); color: #c4b5fd;">
-          <i data-lucide="shield-check" class="w-3 h-3"></i> Cancel anytime
+          <i data-lucide="shield-check" class="w-3 h-3"></i> <span data-i18n="hero.pill.cancel">Cancel anytime</span>
         </span>
         <span class="pill" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: #fbbf24;">
-          <i data-lucide="clock" class="w-3 h-3"></i> Launch in 2-3 weeks
+          <i data-lucide="clock" class="w-3 h-3"></i> <span data-i18n="hero.pill.launch">Launch in 2-3 weeks</span>
         </span>
       </div>
     </div>
@@ -124,8 +670,8 @@
   <!-- ============================ CORE: WEBSITE ============================ -->
   <section class="max-w-6xl mx-auto px-6 pb-10">
     <div class="flex items-baseline justify-between mb-5">
-      <h2 class="text-2xl font-bold font-serif">Your foundation</h2>
-      <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Step 1 of 3</span>
+      <h2 class="text-2xl font-bold font-serif" data-i18n="foundation.h2">Your foundation</h2>
+      <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]" data-i18n="foundation.step">Step 1 of 3</span>
     </div>
 
     <div class="card p-7 card-selected">
@@ -135,54 +681,111 @@
         </div>
         <div class="flex-1">
           <div class="flex items-center flex-wrap gap-2 mb-2">
-            <h3 class="text-xl font-semibold">Custom Website + CRM Dashboard</h3>
-            <span class="pill badge-recommended"><i data-lucide="star" class="w-3 h-3"></i> Included</span>
+            <h3 class="text-xl font-semibold" data-i18n="foundation.title">Custom Website + CRM Dashboard</h3>
+            <span class="pill badge-recommended"><i data-lucide="star" class="w-3 h-3"></i> <span data-i18n="foundation.included">Included</span></span>
           </div>
-          <p class="text-[var(--text-secondary)] text-sm leading-relaxed mb-4">
-            A 5–7 page dynamic website tailored to your cleaning service — services, pricing, service areas,
-            booking, contact, and an "About" story page. Comes with a private dashboard so you can manage
-            client info, requests, and bookings in one place.
+          <p class="text-[var(--text-secondary)] text-sm leading-relaxed mb-4" data-i18n="foundation.desc">
+            A 5–7 page dynamic website tailored to your cleaning service — services, pricing, service areas, booking, contact, and an "About" story page. Comes with a private dashboard so you can manage client info, requests, and bookings in one place.
           </p>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[var(--text-secondary)]">
-            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> 5–7 dynamic pages</div>
-            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Mobile-first design</div>
-            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> CRM dashboard</div>
-            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> SEO foundations</div>
-            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Contact + lead forms</div>
-            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Hosting (year 1)</div>
-            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> SSL + security</div>
-            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Analytics setup</div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="foundation.feat.1">5–7 dynamic pages</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="foundation.feat.2">Mobile-first design</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="foundation.feat.3">CRM dashboard</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="foundation.feat.4">SEO foundations</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="foundation.feat.5">Contact + lead forms</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="foundation.feat.6">Hosting (year 1)</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="foundation.feat.7">SSL + security</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="foundation.feat.8">Analytics setup</span></div>
           </div>
         </div>
         <div class="md:text-right md:min-w-[180px]">
-          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-1">One-time setup</div>
+          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-1" data-i18n="foundation.oneTime">One-time setup</div>
           <div class="flex items-baseline gap-2 md:justify-end">
             <span class="strike price-tag text-lg">$1,200</span>
             <span class="text-3xl font-bold gradient-text price-tag">$500</span>
           </div>
-          <div class="text-xs text-[var(--accent-green)] font-medium mt-1">You save $700</div>
+          <div class="text-xs text-[var(--accent-green)] font-medium mt-1" data-i18n="foundation.save">You save $700</div>
         </div>
       </div>
     </div>
 
-    <!-- Optional care plan -->
-    <div class="card p-5 mt-4" data-service="care">
-      <div class="flex items-center gap-4">
-        <div class="toggle on" data-toggle="care" role="switch" aria-checked="true"></div>
-        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
-          <i data-lucide="wrench" class="w-5 h-5 text-[var(--accent-purple)]"></i>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 flex-wrap">
-            <h4 class="font-semibold">Care Plan — Website Maintenance <span class="text-[var(--text-muted)] font-normal text-sm">(recommended)</span></h4>
+    <!-- Care plan — pick one (mutually exclusive) -->
+    <div class="mt-5">
+      <div class="flex items-baseline justify-between mb-3 px-1">
+        <h4 class="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)]" data-i18n="care.choose">Choose your maintenance approach</h4>
+        <span class="text-xs text-[var(--text-muted)]" data-i18n="care.pickOne">Pick one — or neither</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Option A: Skyfynd care plan -->
+        <div class="card card-selected p-5 flex flex-col" data-service="care">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+              <img src="skyfynd-logo.png" alt="Skyfynd" class="w-7 h-7" style="object-fit:contain; filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.3));" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h4 class="font-semibold" data-i18n="care.alt1.title">Skyfynd Care Plan</h4>
+              </div>
+              <div class="text-xs text-[var(--text-muted)] mt-0.5" data-i18n="care.alt1.tag">Hands-off · we manage everything</div>
+            </div>
+            <div class="toggle on flex-shrink-0" data-toggle="care" role="switch" aria-checked="true"></div>
           </div>
-          <p class="text-xs text-[var(--text-secondary)] mt-0.5">Monthly content edits (up to 1 hr) · security monitoring · automated backups · hosting · SSL · uptime checks</p>
+          <p class="text-xs text-[var(--text-secondary)] mb-4" data-i18n="care.alt1.desc">
+            Monthly content edits (up to 1 hr) · security monitoring · automated backups · hosting · SSL · uptime checks. CMS fully managed by Skyfynd — no setup fee.
+          </p>
+          <div class="space-y-1.5 text-xs text-[var(--text-secondary)] mb-4">
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="care.alt1.feat.1">Up to 1 hr of edits/month</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="care.alt1.feat.2">Hosting · SSL · backups included</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="care.alt1.feat.3">Priority support · email + WhatsApp</span></div>
+          </div>
+          <div class="divider-soft my-3 mt-auto"></div>
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-baseline text-sm">
+              <span class="text-[var(--text-secondary)]" data-i18n="common.setup">Setup</span>
+              <span class="font-semibold price-tag" data-i18n="care.alt1.setupFree">Free</span>
+            </div>
+            <div class="flex justify-between items-baseline text-sm">
+              <span class="text-[var(--text-secondary)]" data-i18n="common.monthly">Monthly</span>
+              <span><span class="strike price-tag mr-2">$79</span><span class="font-semibold price-tag">$39</span><span class="text-xs text-[var(--text-muted)]" data-i18n="common.perMo">/mo</span></span>
+            </div>
+          </div>
         </div>
-        <div class="text-right">
-          <div class="flex items-baseline gap-2 justify-end">
-            <span class="strike price-tag text-sm">$79</span>
-            <span class="text-xl font-bold price-tag">$39</span>
-            <span class="text-xs text-[var(--text-muted)]">/mo</span>
+
+        <!-- Option B: Independent care plan (headless CMS) -->
+        <div class="card p-5 flex flex-col" data-service="careIndependent">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="key-round" class="w-5 h-5 text-[var(--accent-purple)]"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h4 class="font-semibold" data-i18n="care.alt2.title">Independent Care Plan</h4>
+              </div>
+              <div class="text-xs text-[var(--text-muted)] mt-0.5" data-i18n="care.alt2.subtag">Headless CMS · Sanity, Strapi or Directus</div>
+            </div>
+            <div class="toggle flex-shrink-0" data-toggle="careIndependent" role="switch" aria-checked="false"></div>
+          </div>
+          <p class="text-xs text-[var(--text-secondary)] mb-3" data-i18n="care.alt2.desc">
+            We set up a headless CMS in your name (Sanity, Strapi, or Directus) so you can edit pages, services and pricing yourself. Fully hands-off from us after launch — you own the CMS account and pay the provider directly.
+          </p>
+          <div class="space-y-1.5 text-xs text-[var(--text-secondary)] mb-4">
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="care.alt2.feat.1">Self-serve content edits</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="care.alt2.feat.2">Your account · your credentials</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="care.alt2.feat.3">Onboarding & training included</span></div>
+            <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="care.alt2.feat.4">Fully hands-off after launch</span></div>
+          </div>
+          <div class="divider-soft my-3 mt-auto"></div>
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-baseline text-sm">
+              <span class="text-[var(--text-secondary)]" data-i18n="common.setup">Setup</span>
+              <span><span class="strike price-tag mr-2">$350</span><span class="font-semibold price-tag">$200</span></span>
+            </div>
+            <div class="flex justify-between items-baseline text-sm">
+              <span class="text-[var(--text-secondary)]" data-i18n="care.alt2.cmsSub">CMS subscription*</span>
+              <span><span class="font-semibold price-tag">~$20</span><span class="text-xs text-[var(--text-muted)]" data-i18n="common.perMo">/mo</span></span>
+            </div>
+            <div class="text-[10px] text-[var(--text-muted)] italic leading-snug" data-i18n="care.alt2.note">* Paid directly to your CMS provider — pass-through, not billed by Skyfynd.</div>
           </div>
         </div>
       </div>
@@ -192,169 +795,264 @@
   <!-- ============================ ADD-ONS ============================ -->
   <section class="max-w-6xl mx-auto px-6 pb-10">
     <div class="flex items-baseline justify-between mb-5">
-      <h2 class="text-2xl font-bold font-serif">Recommended add-ons</h2>
-      <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Step 2 of 3 · toggle to include</span>
+      <h2 class="text-2xl font-bold font-serif" data-i18n="addons.h2">Recommended add-ons</h2>
+      <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]" data-i18n="addons.step">Step 2 of 3 · toggle to include</span>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
       <!-- AI Chatbot -->
-      <div class="card card-selected p-6" data-service="chatbot">
+      <div class="card p-6" data-service="chatbot">
         <div class="flex items-start justify-between mb-4">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #8B5CF6, #3B82F6);">
             <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
           </div>
-          <div class="toggle on" data-toggle="chatbot" role="switch" aria-checked="true"></div>
+          <div class="toggle" data-toggle="chatbot" role="switch" aria-checked="false"></div>
         </div>
         <div class="flex items-center gap-2 mb-2">
-          <h3 class="text-lg font-semibold">AI Chatbot</h3>
-          <span class="pill badge-recommended"><i data-lucide="zap" class="w-3 h-3"></i> Recommended</span>
+          <h3 class="text-lg font-semibold" data-i18n="chatbot.title">AI Chatbot</h3>
         </div>
-        <p class="text-sm text-[var(--text-secondary)] mb-5">
-          Embedded on your website. Answers common questions (rates, service areas, scheduling),
-          captures leads 24/7, and forwards them to your CRM.
+        <p class="text-sm text-[var(--text-secondary)] mb-5" data-i18n="chatbot.desc">
+          Embedded on your website. Answers common questions (rates, service areas, scheduling), captures leads 24/7, and forwards them to your CRM.
         </p>
 
         <div class="space-y-2 text-xs text-[var(--text-secondary)] mb-5">
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Trained on your services & FAQs</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Lead capture → CRM</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Up to 500 chats/month</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Bilingual (EN + ES)</div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="chatbot.feat.1">Trained on your services & FAQs</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="chatbot.feat.2">Lead capture → CRM</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="chatbot.feat.3">Up to 500 chats/month</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="common.bilingual">Bilingual (EN + ES)</span></div>
         </div>
 
         <div class="divider-soft my-4"></div>
 
         <div class="space-y-2">
           <div class="flex justify-between items-baseline text-sm">
-            <span class="text-[var(--text-secondary)]">Setup</span>
+            <span class="text-[var(--text-secondary)]" data-i18n="common.setup">Setup</span>
             <span><span class="strike price-tag mr-2">$349</span><span class="font-semibold price-tag">$149</span></span>
           </div>
           <div class="flex justify-between items-baseline text-sm">
-            <span class="text-[var(--text-secondary)]">Monthly</span>
+            <span class="text-[var(--text-secondary)]" data-i18n="common.monthly">Monthly</span>
             <span><span class="strike price-tag mr-2">$49</span><span class="font-semibold price-tag">$25</span></span>
           </div>
         </div>
       </div>
 
       <!-- AI Receptionist -->
-      <div class="card card-selected p-6 relative overflow-hidden" data-service="receptionist">
-        <div class="absolute top-0 right-0 px-3 py-1 text-[10px] font-bold uppercase tracking-wider" style="background: var(--gradient-warm); color: #1a1a1a; border-bottom-left-radius: 12px;">Best ROI</div>
+      <div class="card p-6 relative overflow-hidden" data-service="receptionist">
         <div class="flex items-start justify-between mb-4 mt-1">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #ec4899, #f59e0b);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #3B82F6, #10B981);">
             <i data-lucide="phone-call" class="w-6 h-6 text-white"></i>
           </div>
-          <div class="toggle on" data-toggle="receptionist" role="switch" aria-checked="true"></div>
+          <div class="toggle" data-toggle="receptionist" role="switch" aria-checked="false"></div>
         </div>
         <div class="flex items-center gap-2 mb-2">
-          <h3 class="text-lg font-semibold">AI Receptionist</h3>
-          <span class="pill badge-recommended"><i data-lucide="trending-up" class="w-3 h-3"></i> Top pick</span>
+          <h3 class="text-lg font-semibold" data-i18n="recept.title">AI Receptionist</h3>
         </div>
-        <p class="text-sm text-[var(--text-secondary)] mb-5">
-          A friendly AI that sounds remarkably human — books appointments, captures new leads,
-          and never misses a ring. Sized for your current client base.
+        <p class="text-sm text-[var(--text-secondary)] mb-5" data-i18n="recept.desc">
+          A friendly AI that sounds remarkably human — books appointments, captures new leads, and never misses a ring. Sized for your current client base.
         </p>
 
         <div class="space-y-2 text-xs text-[var(--text-secondary)] mb-5">
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> 60 minutes/month included</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Local phone number</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Calendar booking</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Bilingual (EN + ES)</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Voicemail + transcripts</div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="recept.feat.1">60 minutes/month included</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="recept.feat.2">Local phone number</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="recept.feat.3">Calendar booking</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="common.bilingual">Bilingual (EN + ES)</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="recept.feat.5">Voicemail + transcripts</span></div>
         </div>
 
         <div class="divider-soft my-4"></div>
 
         <div class="space-y-2">
           <div class="flex justify-between items-baseline text-sm">
-            <span class="text-[var(--text-secondary)]">Setup</span>
+            <span class="text-[var(--text-secondary)]" data-i18n="common.setup">Setup</span>
             <span><span class="strike price-tag mr-2">$299</span><span class="font-semibold price-tag">$149</span></span>
           </div>
           <div class="flex justify-between items-baseline text-sm">
-            <span class="text-[var(--text-secondary)]">Monthly</span>
+            <span class="text-[var(--text-secondary)]" data-i18n="common.monthly">Monthly</span>
             <span><span class="strike price-tag mr-2">$129</span><span class="font-semibold price-tag">$79</span></span>
           </div>
           <div class="flex justify-between items-baseline text-xs text-[var(--text-muted)] pt-1">
-            <span>Overage</span>
-            <span class="price-tag">$0.30/min after 60</span>
+            <span data-i18n="recept.overage">Overage</span>
+            <span class="price-tag" data-i18n="recept.overageVal">$0.30/min after 60</span>
           </div>
         </div>
+
+        <button class="case-trigger" data-toggle-case aria-expanded="false" aria-controls="case-study">
+          <i data-lucide="microscope" class="w-3.5 h-3.5"></i>
+          <span data-i18n="recept.whyMath">Why 60 min is the right size for Aline</span>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5 case-chev"></i>
+        </button>
       </div>
 
       <!-- Stripe Payments -->
-      <div class="card card-selected p-6" data-service="stripe">
+      <div class="card p-6" data-service="stripe">
         <div class="flex items-start justify-between mb-4">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #635bff, #8b5cf6);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #635BFF, #8B5CF6);">
             <i data-lucide="credit-card" class="w-6 h-6 text-white"></i>
           </div>
-          <div class="toggle on" data-toggle="stripe" role="switch" aria-checked="true"></div>
+          <div class="toggle" data-toggle="stripe" role="switch" aria-checked="false"></div>
         </div>
         <div class="flex items-center gap-2 mb-2">
-          <h3 class="text-lg font-semibold">Online Payments</h3>
-          <span class="pill badge-recommended"><i data-lucide="dollar-sign" class="w-3 h-3"></i> Get paid faster</span>
+          <h3 class="text-lg font-semibold" data-i18n="stripe.title">Online Payments</h3>
         </div>
-        <p class="text-sm text-[var(--text-secondary)] mb-5">
-          Accept deposits and payments online through Stripe. Custom checkout integrated into your site
-          and dashboard — no manual invoicing required.
+        <p class="text-sm text-[var(--text-secondary)] mb-5" data-i18n="stripe.desc">
+          Accept deposits and payments online through Stripe. Custom checkout integrated into your site and dashboard — no manual invoicing required.
         </p>
 
         <div class="space-y-2 text-xs text-[var(--text-secondary)] mb-5">
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Stripe Checkout integration</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Service & deposit payment links</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Payment history in dashboard</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Refund & receipt automation</div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="stripe.feat.1">Stripe Checkout integration</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="stripe.feat.2">Service & deposit payment links</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="stripe.feat.3">Payment history in dashboard</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="stripe.feat.4">Refund & receipt automation</span></div>
         </div>
 
         <div class="divider-soft my-4"></div>
 
         <div class="space-y-2">
           <div class="flex justify-between items-baseline text-sm">
-            <span class="text-[var(--text-secondary)]">Setup</span>
+            <span class="text-[var(--text-secondary)]" data-i18n="common.setup">Setup</span>
             <span><span class="strike price-tag mr-2">$249</span><span class="font-semibold price-tag">$99</span></span>
           </div>
           <div class="flex justify-between items-baseline text-sm">
-            <span class="text-[var(--text-secondary)]">Monthly</span>
+            <span class="text-[var(--text-secondary)]" data-i18n="common.monthly">Monthly</span>
             <span class="font-semibold text-[var(--accent-green)]">$0</span>
           </div>
           <div class="flex justify-between items-baseline text-xs text-[var(--text-muted)] pt-1">
-            <span>Stripe fee</span>
-            <span class="price-tag">2.9% + $0.30 / transaction*</span>
+            <span data-i18n="stripe.fee">Stripe fee</span>
+            <span class="price-tag" data-i18n="stripe.feeVal">2.9% + $0.30 / transaction*</span>
           </div>
         </div>
       </div>
 
     </div>
-    <p class="text-xs text-[var(--text-muted)] mt-3 pl-1">* Stripe transaction fees are charged directly by Stripe and pass through at cost.</p>
+
+    <!-- Case study — expands from the AI Receptionist (middle) card -->
+    <div id="case-study" class="case-expand" aria-hidden="true">
+      <div class="notch"></div>
+      <div class="case-expand-inner">
+        <button class="case-close" data-close-case aria-label="Close">
+          <i data-lucide="x" class="w-3.5 h-3.5"></i>
+        </button>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(245, 158, 11, 0.15);">
+            <i data-lucide="microscope" class="w-5 h-5 text-[var(--accent-orange)]"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold" data-i18n="case.title">Why 60 minutes is the right size for Aline</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-0.5" data-i18n="case.sub">The math behind your AI Receptionist package</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+          <div>
+            <h4 class="font-semibold mb-3 text-[var(--text-primary)]" data-i18n="case.col1.title">Your call volume estimate</h4>
+            <ul class="space-y-2 text-[var(--text-secondary)]">
+              <li class="flex justify-between"><span data-i18n="case.col1.l1">New potential clients (est. 12–15 calls/mo · 4 min)</span><span class="price-tag">~50 min</span></li>
+              <li class="flex justify-between"><span data-i18n="case.col1.l2">Follow-ups & buffer</span><span class="price-tag">~10 min</span></li>
+              <li class="flex justify-between font-semibold text-[var(--text-primary)] pt-2 border-t border-white/5"><span data-i18n="case.col1.l3">Estimated monthly usage</span><span class="price-tag">≈ 60 min</span></li>
+            </ul>
+            <div class="mt-4 p-3 rounded-lg" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2);">
+              <p class="text-xs text-[#34d399] flex items-start gap-2"><i data-lucide="shield-check" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i><span data-i18n-html="case.col1.smart"><strong>Smart minute strategy:</strong> the AI Receptionist number is reserved for <em>new potential clients only</em>. Once a lead converts, you switch them to your personal number — so existing clients and outbound calls never burn your monthly minutes.</span></p>
+            </div>
+            <p class="text-xs text-[var(--text-muted)] mt-3 italic" data-i18n="case.col1.note">If you grow past 60 min, overage is just $0.30/min — and we'll bump you to the next tier if it makes sense.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-3 text-[var(--text-primary)]" data-i18n="case.col2.title">What goes into a call minute</h4>
+            <ul class="space-y-2 text-[var(--text-secondary)]">
+              <li class="flex justify-between"><span data-i18n="case.col2.l1">Twilio inbound (local number)</span><span class="price-tag">$0.0085/min</span></li>
+              <li class="flex justify-between"><span data-i18n="case.col2.l2">Retell AI voice engine</span><span class="price-tag">$0.070/min</span></li>
+              <li class="flex justify-between"><span data-i18n="case.col2.l3">LLM (GPT-5 nano)</span><span class="price-tag">$0.003/min</span></li>
+              <li class="flex justify-between"><span data-i18n="case.col2.l4">Standard TTS voice</span><span class="price-tag">$0.015/min</span></li>
+              <li class="flex justify-between font-semibold text-[var(--text-primary)] pt-2 border-t border-white/5"><span data-i18n="case.col2.total">Real per-minute cost</span><span class="price-tag">≈ $0.10/min</span></li>
+            </ul>
+            <p class="text-xs text-[var(--text-muted)] mt-3 italic" data-i18n="case.col2.note">We handle all vendor billing — you pay one flat monthly rate, no surprise invoices from Twilio or Retell.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ============================ MARKETING / FLYERS ============================ -->
   <section class="max-w-6xl mx-auto px-6 pb-10">
     <div class="flex items-baseline justify-between mb-5">
-      <h2 class="text-2xl font-bold font-serif">Marketing materials</h2>
-      <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Step 3 of 3 · optional</span>
+      <h2 class="text-2xl font-bold font-serif" data-i18n="marketing.h2">Marketing materials</h2>
+      <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]" data-i18n="marketing.step">Step 3 of 3 · optional</span>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Business Cards -->
+      <div class="card p-6" data-service="cards">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #A78BFA, #8B5CF6);">
+            <i data-lucide="contact" class="w-6 h-6 text-white"></i>
+          </div>
+          <div class="toggle" data-toggle="cards" role="switch" aria-checked="false"></div>
+        </div>
+        <h3 class="text-lg font-semibold mb-1" data-i18n="cards.title">Business Cards — Design</h3>
+        <p class="text-xs text-[var(--text-muted)] mb-3" data-i18n="cards.subtag">We design a set of 100 — you choose how to print them.</p>
+        <p class="text-sm text-[var(--text-secondary)] mb-4" data-i18n-html="cards.desc">
+          We design your business cards (set of 100) tailored to your brand and deliver print-ready files. From there it's your call: <strong style="color: var(--accent-purple-light)">print them yourself</strong> with any local printer or service like VistaPrint, or <strong style="color: var(--accent-purple-light)">let us order & ship them to you</strong>.
+        </p>
+        <div class="space-y-2 text-xs text-[var(--text-secondary)] mb-4">
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="cards.feat.1">Custom design for 100 cards · 2 revisions</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="cards.feat.2">Print-ready files (PDF + source)</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="cards.feat.3">Option A — print yourself at cost</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="cards.feat.4">Option B — we print &amp; ship for you</span></div>
+        </div>
+        <div class="divider-soft my-4"></div>
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-baseline text-sm">
+            <span class="text-[var(--text-secondary)]" data-i18n="cards.designLabel">Design</span>
+            <span class="text-2xl font-bold price-tag">$100</span>
+          </div>
+          <div class="flex justify-between items-baseline text-xs">
+            <span class="text-[var(--text-muted)]" data-i18n="cards.printLabel">+ Printing (optional)</span>
+            <span class="text-[var(--text-muted)]">$19–$52<span class="opacity-70" data-i18n="cards.printQty"> / 100</span></span>
+          </div>
+          <div class="text-[10px] text-[var(--text-muted)] italic leading-snug" data-i18n="cards.printNote">Matte / glossy on the low end, foil &amp; soft-touch on the premium end. Skip if you'd rather print yourself.</div>
+        </div>
+
+        <button class="samples-trigger" data-toggle-samples aria-expanded="false" aria-controls="cards-samples">
+          <i data-lucide="image" class="w-3.5 h-3.5"></i>
+          <span data-i18n="cards.viewSamples">View sample designs</span>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5 samples-chev"></i>
+        </button>
+
+        <div id="cards-samples" class="samples-expand" aria-hidden="true">
+          <div class="samples-grid">
+            <a class="sample-thumb" data-lightbox-src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/business-card-1.jpg">
+              <img src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/business-card-1.jpg" alt="Business card sample 1" loading="lazy" />
+            </a>
+            <a class="sample-thumb" data-lightbox-src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/business-card-2.jpg">
+              <img src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/business-card-2.jpg" alt="Business card sample 2" loading="lazy" />
+            </a>
+          </div>
+          <p class="samples-caption" data-i18n="cards.samplesCaption">Examples of recent designs · click to enlarge</p>
+        </div>
+      </div>
+
       <!-- Flyers -->
       <div class="card p-6" data-service="flyers">
         <div class="flex items-start justify-between mb-4">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">
             <i data-lucide="file-image" class="w-6 h-6 text-white"></i>
           </div>
           <div class="toggle" data-toggle="flyers" role="switch" aria-checked="false"></div>
         </div>
-        <h3 class="text-lg font-semibold mb-1">Flyers — Design + Print</h3>
-        <p class="text-sm text-[var(--text-secondary)] mb-4">
-          500 full-color flyers printed on quality stock and ready to distribute.
-          Custom design that matches your brand.
+        <h3 class="text-lg font-semibold mb-1" data-i18n="flyers.title">Flyers — Design + Print</h3>
+        <p class="text-sm text-[var(--text-secondary)] mb-4" data-i18n="flyers.desc">
+          500 full-color flyers printed on quality stock and ready to distribute. Custom design that matches your brand.
         </p>
         <div class="space-y-2 text-xs text-[var(--text-secondary)] mb-4">
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> 500 units · full-color</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Custom design · 2 revisions</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Print + delivery to you</div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="flyers.feat.1">500 units · full-color</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="flyers.feat.2">Custom design · 2 revisions</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="flyers.feat.3">Print + delivery to you</span></div>
         </div>
         <div class="divider-soft my-4"></div>
         <div class="flex justify-between items-baseline">
-          <span class="text-[var(--text-secondary)] text-sm">Starting at</span>
+          <span class="text-[var(--text-secondary)] text-sm" data-i18n="flyers.startingAt">Starting at</span>
           <span class="text-2xl font-bold price-tag">$99</span>
         </div>
       </div>
@@ -362,80 +1060,32 @@
       <!-- USPS Door-to-Door -->
       <div class="card p-6" data-service="usps">
         <div class="flex items-start justify-between mb-4">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, #3B82F6, #10B981);">
             <i data-lucide="mail" class="w-6 h-6 text-white"></i>
           </div>
-          <span class="pill" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: #93c5fd;">
-            <i data-lucide="message-square" class="w-3 h-3"></i> Contact us
-          </span>
+          <div class="toggle" data-toggle="usps" role="switch" aria-checked="false"></div>
         </div>
-        <h3 class="text-lg font-semibold mb-1">USPS Door-to-Door Delivery</h3>
-        <p class="text-sm text-[var(--text-secondary)] mb-4">
-          Reach hundreds of homes in your target neighborhoods via USPS Every Door Direct Mail.
-          We handle routing, paperwork, and drop-off. Pricing depends on the routes you select.
+        <h3 class="text-lg font-semibold mb-1" data-i18n="usps.title">USPS Door-to-Door Delivery</h3>
+        <p class="text-sm text-[var(--text-secondary)] mb-4" data-i18n="usps.desc">
+          Reach hundreds of homes in your target neighborhoods via USPS Every Door Direct Mail. We handle routing, paperwork, and drop-off. Pricing depends on the routes you select.
         </p>
         <div class="space-y-2 text-xs text-[var(--text-secondary)] mb-4">
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> Choose target ZIP codes & routes</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> USPS handles delivery to every door</div>
-          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> We manage filing & paperwork</div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="usps.feat.1">Choose target ZIP codes & routes</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="usps.feat.2">USPS handles delivery to every door</span></div>
+          <div class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[var(--accent-green)]"></i> <span data-i18n="usps.feat.3">We manage filing & paperwork</span></div>
         </div>
         <div class="divider-soft my-4"></div>
-        <button class="w-full py-2.5 rounded-lg border border-[var(--accent-purple)] text-[var(--accent-purple)] text-sm font-semibold hover:bg-[var(--accent-purple)] hover:text-white transition-all">
+        <button class="w-full py-2.5 rounded-lg border border-[var(--accent-purple)] text-[var(--accent-purple)] text-sm font-semibold hover:bg-[var(--accent-purple)] hover:text-white transition-all" data-i18n="usps.cta">
           Request a routing quote
         </button>
       </div>
     </div>
   </section>
 
-  <!-- ============================ CASE STUDY ============================ -->
-  <section class="max-w-6xl mx-auto px-6 pb-10">
-    <details class="card p-6">
-      <summary class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(245, 158, 11, 0.15);">
-            <i data-lucide="microscope" class="w-5 h-5 text-[var(--accent-orange)]"></i>
-          </div>
-          <div>
-            <h3 class="font-semibold">Why 60 minutes is the right size for Aline</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-0.5">The math behind your AI Receptionist package</p>
-          </div>
-        </div>
-        <i data-lucide="chevron-down" class="w-5 h-5 text-[var(--text-secondary)] chev"></i>
-      </summary>
-
-      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-        <div>
-          <h4 class="font-semibold mb-3 text-[var(--text-primary)]">Your call volume estimate</h4>
-          <ul class="space-y-2 text-[var(--text-secondary)]">
-            <li class="flex justify-between"><span>New potential clients (est. 12–15 calls/mo · 4 min)</span><span class="price-tag">~50 min</span></li>
-            <li class="flex justify-between"><span>Follow-ups & buffer</span><span class="price-tag">~10 min</span></li>
-            <li class="flex justify-between font-semibold text-[var(--text-primary)] pt-2 border-t border-white/5"><span>Estimated monthly usage</span><span class="price-tag">≈ 60 min</span></li>
-          </ul>
-          <div class="mt-4 p-3 rounded-lg" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2);">
-            <p class="text-xs text-[#34d399] flex items-start gap-2"><i data-lucide="shield-check" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i><span><strong>Smart minute strategy:</strong> the AI Receptionist number is reserved for <em>new potential clients only</em>. Once a lead converts, you switch them to your personal number — so existing clients and outbound calls never burn your monthly minutes.</span></p>
-          </div>
-          <p class="text-xs text-[var(--text-muted)] mt-3 italic">If you grow past 60 min, overage is just $0.30/min — and we'll bump you to the next tier if it makes sense.</p>
-        </div>
-
-        <div>
-          <h4 class="font-semibold mb-3 text-[var(--text-primary)]">What goes into a call minute</h4>
-          <ul class="space-y-2 text-[var(--text-secondary)]">
-            <li class="flex justify-between"><span>Twilio inbound (local number)</span><span class="price-tag">$0.0085/min</span></li>
-            <li class="flex justify-between"><span>Retell AI voice engine</span><span class="price-tag">$0.070/min</span></li>
-            <li class="flex justify-between"><span>LLM (GPT-5 nano)</span><span class="price-tag">$0.003/min</span></li>
-            <li class="flex justify-between"><span>Standard TTS voice</span><span class="price-tag">$0.015/min</span></li>
-            <li class="flex justify-between font-semibold text-[var(--text-primary)] pt-2 border-t border-white/5"><span>Real per-minute cost</span><span class="price-tag">≈ $0.10/min</span></li>
-          </ul>
-          <p class="text-xs text-[var(--text-muted)] mt-3 italic">We handle all vendor billing — you pay one flat monthly rate, no surprise invoices from Twilio or Retell.</p>
-        </div>
-      </div>
-    </details>
-  </section>
-
   <!-- ============================ PRICING BREAKDOWN ============================ -->
   <section class="max-w-6xl mx-auto px-6 pb-10">
     <div class="flex items-baseline justify-between mb-5">
-      <h2 class="text-2xl font-bold font-serif">Your investment, in three parts</h2>
+      <h2 class="text-2xl font-bold font-serif" data-i18n="breakdown.h2">Your investment, in three parts</h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -446,16 +1096,16 @@
           <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: rgba(139, 92, 246, 0.15);">
             <i data-lucide="rocket" class="w-5 h-5 text-[var(--accent-purple)]"></i>
           </div>
-          <h3 class="font-semibold">One-Time Setup</h3>
+          <h3 class="font-semibold" data-i18n="breakdown.setup.title">One-Time Setup</h3>
         </div>
         <div id="setup-lines" class="mb-4"></div>
         <div class="pt-3 border-t border-white/10">
           <div class="flex justify-between items-baseline text-xs text-[var(--text-muted)] mb-1">
-            <span>Regular total</span>
+            <span data-i18n="breakdown.regular">Regular total</span>
             <span class="strike price-tag" id="setup-regular">$2,097</span>
           </div>
           <div class="flex justify-between items-baseline">
-            <span class="text-sm font-semibold">Aline's setup</span>
+            <span class="text-sm font-semibold" data-i18n="breakdown.setup.alines">Aline's setup</span>
             <span class="text-2xl font-bold gradient-text price-tag" id="setup-total">$897</span>
           </div>
         </div>
@@ -467,16 +1117,16 @@
           <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: rgba(236, 72, 153, 0.15);">
             <i data-lucide="repeat" class="w-5 h-5 text-[var(--accent-pink)]"></i>
           </div>
-          <h3 class="font-semibold">Monthly Recurring</h3>
+          <h3 class="font-semibold" data-i18n="breakdown.monthly.title">Monthly Recurring</h3>
         </div>
         <div id="monthly-lines" class="mb-4"></div>
         <div class="pt-3 border-t border-white/10">
           <div class="flex justify-between items-baseline text-xs text-[var(--text-muted)] mb-1">
-            <span>Regular total</span>
+            <span data-i18n="breakdown.regular">Regular total</span>
             <span class="strike price-tag" id="monthly-regular">$257/mo</span>
           </div>
           <div class="flex justify-between items-baseline">
-            <span class="text-sm font-semibold">Aline's monthly</span>
+            <span class="text-sm font-semibold" data-i18n="breakdown.monthly.alines">Aline's monthly</span>
             <span class="text-2xl font-bold gradient-text price-tag" id="monthly-total">$143/mo</span>
           </div>
         </div>
@@ -488,11 +1138,11 @@
           <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: rgba(245, 158, 11, 0.15);">
             <i data-lucide="activity" class="w-5 h-5 text-[var(--accent-orange)]"></i>
           </div>
-          <h3 class="font-semibold">Pay-per-use</h3>
+          <h3 class="font-semibold" data-i18n="breakdown.usage.title">Pay-per-use</h3>
         </div>
         <div id="usage-lines" class="space-y-3"></div>
         <div class="pt-3 mt-3 border-t border-white/10">
-          <p class="text-xs text-[var(--text-muted)] italic">
+          <p class="text-xs text-[var(--text-muted)] italic" data-i18n="breakdown.usage.note">
             Only billed if/when used. Typical client at your size: $0–$10/mo on overage.
           </p>
         </div>
@@ -502,36 +1152,45 @@
 
   <!-- ============================ TOTAL / SAVINGS ============================ -->
   <section class="max-w-6xl mx-auto px-6 pb-10">
-    <div class="card p-8 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(236, 72, 153, 0.08), rgba(245, 158, 11, 0.06));">
-      <div class="glow-orb w-[400px] h-[400px] top-1/2 right-0 -translate-y-1/2" style="background: var(--accent-pink); opacity: 0.15;"></div>
-
+    <div class="card p-8 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.08), rgba(16, 185, 129, 0.08));">
       <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
         <div>
-          <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2">Total to launch</div>
+          <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2" data-i18n="total.launch">Total to launch</div>
           <div class="text-5xl font-bold font-serif gradient-text price-tag" id="grand-setup">$897</div>
-          <div class="text-sm text-[var(--text-secondary)] mt-1">one-time setup</div>
+          <div class="text-sm text-[var(--text-secondary)] mt-1" data-i18n="total.launchSub">one-time setup</div>
         </div>
         <div>
-          <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2">Then monthly</div>
+          <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2" data-i18n="total.monthly">Then monthly</div>
           <div class="text-5xl font-bold font-serif gradient-text price-tag" id="grand-monthly">$143</div>
-          <div class="text-sm text-[var(--text-secondary)] mt-1">per month, everything included</div>
+          <div class="text-sm text-[var(--text-secondary)] mt-1" data-i18n="total.monthlySub">per month, everything included</div>
         </div>
         <div>
-          <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2">Your savings</div>
+          <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2" data-i18n="total.savings">Your savings</div>
           <div class="text-5xl font-bold font-serif savings-shimmer price-tag" id="grand-savings">$1,314</div>
-          <div class="text-sm text-[var(--text-secondary)] mt-1">vs. our regular rates</div>
+          <div class="text-sm text-[var(--text-secondary)] mt-1" data-i18n="total.savingsSub">vs. our regular rates</div>
         </div>
       </div>
 
       <div class="divider-soft my-7 relative"></div>
 
-      <div class="relative flex flex-col sm:flex-row gap-3 justify-end">
-        <button class="px-6 py-3 rounded-xl border border-white/10 text-[var(--text-secondary)] text-sm font-semibold hover:bg-white/5 transition-all flex items-center gap-2 justify-center">
-          <i data-lucide="message-square" class="w-4 h-4"></i> Request changes
-        </button>
-        <a href="mailto:carlosmario888@hotmail.com?subject=Accepting%20SkyFynd%20Quote%20%23SF-2026-0511-AL" class="pulse px-7 py-3 rounded-xl text-white text-sm font-semibold flex items-center gap-2 justify-center" style="background: var(--gradient-primary);">
-          <i data-lucide="check" class="w-4 h-4"></i> Accept & start building
-        </a>
+      <div class="relative flex flex-col md:flex-row gap-5 md:items-center md:justify-between">
+        <div class="flex items-start gap-3 max-w-xl">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style="background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(167,139,250,0.3);">
+            <i data-lucide="hand-coins" class="w-4 h-4 text-[var(--accent-purple-light)]"></i>
+          </div>
+          <div class="text-xs text-[var(--text-secondary)] leading-relaxed">
+            <div class="text-[10px] uppercase tracking-widest text-[var(--text-muted)] font-semibold mb-1" data-i18n="total.nextStep.label">What happens next</div>
+            <span data-i18n="total.nextStep.body">Once you accept, we'll review the final quote with you and send a secure payment link for the deposit. Work begins as soon as the deposit is received.</span>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 md:flex-shrink-0">
+          <button class="px-6 py-3 rounded-xl border border-white/10 text-[var(--text-secondary)] text-sm font-semibold hover:bg-white/5 transition-all flex items-center gap-2 justify-center">
+            <i data-lucide="message-square" class="w-4 h-4"></i> <span data-i18n="total.btn.changes">Request changes</span>
+          </button>
+          <a href="mailto:carlosmario888@hotmail.com?subject=Accepting%20Skyfynd%20Quote%20%23SF-2026-0512-AL" class="pulse px-7 py-3 rounded-xl text-white text-sm font-semibold flex items-center gap-2 justify-center" style="background: var(--gradient-primary);">
+            <i data-lucide="check" class="w-4 h-4"></i> <span data-i18n="total.btn.accept">Accept & start building</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -541,15 +1200,13 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div>
         <div class="flex items-center gap-3 mb-2">
-          <div class="w-7 h-7 rounded-md flex items-center justify-center" style="background: var(--gradient-primary);">
-            <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
-          </div>
-          <span class="font-serif font-bold">SkyFynd</span>
+          <img src="skyfynd-logo.png" alt="Skyfynd logo" class="w-8 h-8 flex-shrink-0" style="object-fit:contain;" />
+          <span class="wordmark text-base">Skyfynd</span>
         </div>
-        <p class="text-xs text-[var(--text-muted)]">Prepared exclusively for Aline · Quote valid through June 10, 2026</p>
+        <p class="text-xs text-[var(--text-muted)]" data-i18n="footer.tagline">Prepared exclusively for Aline · Quote valid through June 11, 2026</p>
       </div>
       <div class="text-xs text-[var(--text-muted)] text-right">
-        <p>Questions? Reach out anytime.</p>
+        <p data-i18n="footer.questions">Questions? Reach out anytime.</p>
         <p class="mt-1">carlosmario888@hotmail.com</p>
       </div>
     </div>
@@ -559,24 +1216,614 @@
   <div class="sticky-total max-w-6xl mx-auto px-6 md:hidden">
     <div class="card p-4 flex items-center justify-between shadow-2xl" style="background: rgba(28, 24, 37, 0.95); backdrop-filter: blur(12px);">
       <div>
-        <div class="text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Live total</div>
+        <div class="text-[10px] uppercase tracking-wider text-[var(--text-muted)]" data-i18n="mini.liveTotal">Live total</div>
         <div class="text-lg font-bold gradient-text price-tag"><span id="mini-setup">$897</span> + <span id="mini-monthly">$143</span>/mo</div>
       </div>
-      <a href="#" class="px-4 py-2 rounded-lg text-white text-xs font-semibold" style="background: var(--gradient-primary);">Accept</a>
+      <a href="#" class="px-4 py-2 rounded-lg text-white text-xs font-semibold" style="background: var(--gradient-primary);" data-i18n="mini.accept">Accept</a>
     </div>
+  </div>
+
+  <!-- ============================ LIGHTBOX ============================ -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <img id="lightbox-img" src="" alt="" />
   </div>
 
   <!-- ============================ LOGIC ============================ -->
   <script>
     lucide.createIcons();
 
+    // ===== Skyfynd FloatingStars (vanilla port) =====
+    (function buildStars() {
+      const root = document.getElementById('starfield');
+      if (!root) return;
+
+      const nebulae = [
+        { top:'5%',    right:'5%',  w:400, h:400, bg:'radial-gradient(ellipse at center, rgba(167,139,250,0.08) 0%, rgba(96,175,250,0.04) 40%, transparent 70%)', blur:60, dur:20, delay:0 },
+        { bottom:'10%',left:'0%',   w:500, h:350, bg:'radial-gradient(ellipse at center, rgba(96,175,250,0.06) 0%, rgba(52,211,153,0.03) 40%, transparent 70%)',  blur:70, dur:25, delay:5 },
+        { top:'40%',   left:'30%',  w:300, h:300, bg:'radial-gradient(ellipse at center, rgba(167,139,250,0.04) 0%, rgba(52,211,153,0.02) 50%, transparent 70%)', blur:50, dur:18, delay:10 },
+      ];
+      nebulae.forEach(n => {
+        const d = document.createElement('div');
+        d.className = 'nebula';
+        Object.assign(d.style, {
+          top: n.top || '', right: n.right || '', bottom: n.bottom || '', left: n.left || '',
+          width: n.w + 'px', height: n.h + 'px',
+          background: n.bg, filter: 'blur(' + n.blur + 'px)',
+          animation: 'nebulaShift ' + n.dur + 's ease-in-out infinite ' + n.delay + 's',
+        });
+        root.appendChild(d);
+      });
+
+      for (let i = 0; i < 120; i++) {
+        const left = (i * 2.73 + i * i * 0.37) % 100;
+        const top = 1 + ((i * 17.3 + i * 0.7) % 98);
+        const size = 0.8 + (i % 5) * 0.4;
+        const duration = 4 + (i * 0.31) % 6;
+        const delay = (i * 0.23) % 7;
+        const isTwinkle = i % 3 !== 0;
+        const brightness = 0.5 + (i % 4) * 0.15;
+        const s = document.createElement('div');
+        s.className = 'star';
+        Object.assign(s.style, {
+          width: size + 'px', height: size + 'px',
+          left: left + '%', top: top + '%',
+          background: 'rgba(255,255,255,' + brightness + ')',
+          boxShadow: '0 0 ' + size + 'px rgba(255,255,255,0.15)',
+          animation: (isTwinkle ? 'starTwinkle' : 'starFloat') + ' ' + duration + 's ease-in-out infinite',
+          animationDelay: delay + 's',
+        });
+        root.appendChild(s);
+      }
+
+      const accents = [
+        { left:8,  top:12, size:3,   color:'rgba(167,139,250,0.6)',  glow:'rgba(167,139,250,0.3)',  dur:6,   delay:0.5 },
+        { left:92, top:25, size:2.5, color:'rgba(96,175,250,0.5)',   glow:'rgba(96,175,250,0.3)',   dur:7,   delay:1.2 },
+        { left:45, top:8,  size:2,   color:'rgba(52,211,153,0.4)',   glow:'rgba(52,211,153,0.2)',   dur:5.5, delay:2.3 },
+        { left:75, top:85, size:2.5, color:'rgba(167,139,250,0.5)',  glow:'rgba(167,139,250,0.25)', dur:8,   delay:0.8 },
+        { left:20, top:70, size:2,   color:'rgba(96,175,250,0.45)',  glow:'rgba(96,175,250,0.2)',   dur:6.5, delay:3.1 },
+        { left:60, top:92, size:1.8, color:'rgba(52,211,153,0.4)',   glow:'rgba(52,211,153,0.2)',   dur:7.5, delay:1.8 },
+      ];
+      accents.forEach(a => {
+        const s = document.createElement('div');
+        s.className = 'star';
+        Object.assign(s.style, {
+          width: a.size + 'px', height: a.size + 'px',
+          left: a.left + '%', top: a.top + '%',
+          background: a.color,
+          boxShadow: '0 0 ' + (a.size * 3) + 'px ' + a.glow + ', 0 0 ' + (a.size * 6) + 'px ' + a.glow,
+          animation: 'accentPulse ' + a.dur + 's ease-in-out infinite',
+          animationDelay: a.delay + 's',
+        });
+        root.appendChild(s);
+      });
+    })();
+
+    // ===== Translations (en / pt-BR) =====
+    const i18n = {
+      en: {
+        'meta.title': 'Skyfynd — Custom Quote for Aline',
+        'nav.tagline': 'Creative · Digital · AI',
+        'nav.quoteNum': 'Quote #SF-2026-0512-AL',
+        'nav.issued': 'Issued May 12, 2026 · Valid 30 days',
+        'nav.translate': 'Translate',
+        'journey.title': "Aline's Cleaning Journey",
+        'journey.sub': "Our read on your business — services framed around each stage you're growing through.",
+        'journey.tab': "Aline's Cleaning Journey",
+        'journey.now': 'Now',
+        'journey.next': 'Next',
+        'journey.future': 'Future',
+        'journey.recsLabel': "Skyfynd's recommended steps",
+        'journey.p1.title': 'Phase 1 — Foundation',
+        'journey.p1.context': 'Independent owner · 17 houses',
+        'journey.p1.g1': 'Register LLC',
+        'journey.p1.g2': 'Issue EIN',
+        'journey.p1.g3': 'Get business insured',
+        'journey.p1.g4': 'Reach 40 clients',
+        'journey.p1.g5': 'Strategize first hire position',
+        'journey.p1.g6': 'Business bank account',
+        'journey.p2.title': 'Phase 2 — Growth',
+        'journey.p2.context': 'Building a small team at 30–40 recurring clients',
+        'journey.p2.g1': 'Start hiring',
+        'journey.p2.g2': 'Insurance for 1099 contractors vs. SSN/employees',
+        'journey.p2.g3': 'Recurring client retention & reviews',
+        'journey.p3.title': 'Phase 3 — Scale',
+        'journey.p3.context': 'Multi-area & premium tiers',
+        'journey.p3.g1': 'Expand to neighboring service areas',
+        'journey.p3.g2': 'Premium deep-clean & move-out tiers',
+        'journey.p3.g3': 'Branded fleet & uniforms',
+        'journey.foot': 'Skyfynd · prepared for Aline',
+        'hero.promo': "Aline's Welcome Promotion",
+        'hero.h1.pre': 'A custom plan to grow',
+        'hero.intro': "Hi Aline, we've built this custom proposal for your website based on our conversation. We've also suggested a few extra services you can pursue—either now or down the road—to help you capture more leads, save time answering calls, and polish your brand online. You can easily adjust the services below; just check or uncheck the boxes to see how it changes the total.",
+        'hero.intro.firstYear': 'Heads up: the discounted prices below are your welcome-promotion rate for the first year. Standard rates (shown crossed out) apply on renewal.',
+        'hero.pill.noCommitment': 'No commitment',
+        'hero.pill.cancel': 'Cancel anytime',
+        'hero.pill.launch': 'Launch in 2-3 weeks',
+        'foundation.h2': 'Your foundation',
+        'foundation.step': 'Step 1 of 3',
+        'foundation.title': 'Custom Website + CRM Dashboard',
+        'foundation.included': 'Included',
+        'foundation.desc': 'A 5–7 page dynamic website tailored to your cleaning service — services, pricing, service areas, booking, contact, and an "About" story page. Comes with a private dashboard so you can manage client info, requests, and bookings in one place.',
+        'foundation.feat.1': '5–7 dynamic pages',
+        'foundation.feat.2': 'Mobile-first design',
+        'foundation.feat.3': 'CRM dashboard',
+        'foundation.feat.4': 'SEO foundations',
+        'foundation.feat.5': 'Contact + lead forms',
+        'foundation.feat.6': 'Hosting (year 1)',
+        'foundation.feat.7': 'SSL + security',
+        'foundation.feat.8': 'Analytics setup',
+        'foundation.oneTime': 'One-time setup',
+        'foundation.save': 'You save $700',
+        'care.title': 'Care Plan — Website Maintenance',
+        'care.recommended': '(recommended)',
+        'care.desc': 'Monthly content edits (up to 1 hr) · security monitoring · automated backups · hosting · SSL · uptime checks',
+        'care.choose': 'Choose your maintenance approach',
+        'care.pickOne': 'Pick one — or neither',
+        'care.alt1.title': 'Skyfynd Care Plan',
+        'care.alt1.tag': 'Hands-off · we manage everything',
+        'care.alt1.desc': 'Monthly content edits (up to 1 hr) · security monitoring · automated backups · hosting · SSL · uptime checks. CMS fully managed by Skyfynd — no setup fee.',
+        'care.alt1.feat.1': 'Up to 1 hr of edits/month',
+        'care.alt1.feat.2': 'Hosting · SSL · backups included',
+        'care.alt1.feat.3': 'Priority support · email + WhatsApp',
+        'care.alt1.setupFree': 'Free',
+        'care.alt2.title': 'Independent Care Plan',
+        'care.alt2.tag': 'You own it',
+        'care.alt2.subtag': 'Headless CMS · Sanity, Strapi or Directus',
+        'care.alt2.desc': 'We set up a headless CMS in your name (Sanity, Strapi, or Directus) so you can edit pages, services and pricing yourself. Fully hands-off from us after launch — you own the CMS account and pay the provider directly.',
+        'care.alt2.feat.1': 'Self-serve content edits',
+        'care.alt2.feat.2': 'Your account · your credentials',
+        'care.alt2.feat.3': 'Onboarding & training included',
+        'care.alt2.feat.4': 'Fully hands-off after launch',
+        'care.alt2.cmsSub': 'CMS subscription*',
+        'care.alt2.note': '* Paid directly to your CMS provider — pass-through, not billed by Skyfynd.',
+        'common.perMo': '/mo',
+        'common.setup': 'Setup',
+        'common.monthly': 'Monthly',
+        'common.recommended': 'Recommended',
+        'common.bilingual': 'Bilingual (EN + ES)',
+        'addons.h2': 'Recommended add-ons',
+        'addons.step': 'Step 2 of 3 · toggle to include',
+        'chatbot.title': 'AI Chatbot',
+        'chatbot.desc': 'Embedded on your website. Answers common questions (rates, service areas, scheduling), captures leads 24/7, and forwards them to your CRM.',
+        'chatbot.feat.1': 'Trained on your services & FAQs',
+        'chatbot.feat.2': 'Lead capture → CRM',
+        'chatbot.feat.3': 'Up to 500 chats/month',
+        'recept.bestRoi': 'Best ROI',
+        'recept.title': 'AI Receptionist',
+        'recept.topPick': 'Top pick',
+        'recept.desc': 'A friendly AI that sounds remarkably human — books appointments, captures new leads, and never misses a ring. Sized for your current client base.',
+        'recept.feat.1': '60 minutes/month included',
+        'recept.feat.2': 'Local phone number',
+        'recept.feat.3': 'Calendar booking',
+        'recept.feat.5': 'Voicemail + transcripts',
+        'recept.overage': 'Overage',
+        'recept.overageVal': '$0.30/min after 60',
+        'recept.whyMath': 'Why 60 min is the right size for Aline',
+        'stripe.title': 'Online Payments',
+        'stripe.fast': 'Get paid faster',
+        'stripe.desc': 'Accept deposits and payments online through Stripe. Custom checkout integrated into your site and dashboard — no manual invoicing required.',
+        'stripe.feat.1': 'Stripe Checkout integration',
+        'stripe.feat.2': 'Service & deposit payment links',
+        'stripe.feat.3': 'Payment history in dashboard',
+        'stripe.feat.4': 'Refund & receipt automation',
+        'stripe.fee': 'Stripe fee',
+        'stripe.feeVal': '2.9% + $0.30 / transaction*',
+        'stripe.note': '* Stripe transaction fees are charged directly by Stripe and pass through at cost.',
+        'marketing.h2': 'Marketing materials',
+        'marketing.step': 'Step 3 of 3 · optional',
+        'flyers.title': 'Flyers — Design + Print',
+        'flyers.desc': '500 full-color flyers printed on quality stock and ready to distribute. Custom design that matches your brand.',
+        'flyers.feat.1': '500 units · full-color',
+        'flyers.feat.2': 'Custom design · 2 revisions',
+        'flyers.feat.3': 'Print + delivery to you',
+        'flyers.startingAt': 'Starting at',
+        'usps.contact': 'Contact us',
+        'usps.title': 'USPS Door-to-Door Delivery',
+        'usps.desc': 'Reach hundreds of homes in your target neighborhoods via USPS Every Door Direct Mail. We handle routing, paperwork, and drop-off. Pricing depends on the routes you select.',
+        'usps.feat.1': 'Choose target ZIP codes & routes',
+        'usps.feat.2': 'USPS handles delivery to every door',
+        'usps.feat.3': 'We manage filing & paperwork',
+        'usps.cta': 'Request a routing quote',
+        'case.title': 'Why 60 minutes is the right size for Aline',
+        'case.sub': 'The math behind your AI Receptionist package',
+        'case.col1.title': 'Your call volume estimate',
+        'case.col1.l1': 'New potential clients (est. 12–15 calls/mo · 4 min)',
+        'case.col1.l2': 'Follow-ups & buffer',
+        'case.col1.l3': 'Estimated monthly usage',
+        'case.col1.smart': '<strong>Smart minute strategy:</strong> the AI Receptionist number is reserved for <em>new potential clients only</em>. Once a lead converts, you switch them to your personal number — so existing clients and outbound calls never burn your monthly minutes.',
+        'case.col1.note': "If you grow past 60 min, overage is just $0.30/min — and we'll bump you to the next tier if it makes sense.",
+        'case.col2.title': 'What goes into a call minute',
+        'case.col2.l1': 'Twilio inbound (local number)',
+        'case.col2.l2': 'Retell AI voice engine',
+        'case.col2.l3': 'LLM (GPT-5 nano)',
+        'case.col2.l4': 'Standard TTS voice',
+        'case.col2.total': 'Real per-minute cost',
+        'case.col2.note': 'We handle all vendor billing — you pay one flat monthly rate, no surprise invoices from Twilio or Retell.',
+        'breakdown.h2': 'Your investment, in three parts',
+        'breakdown.setup.title': 'One-Time Setup',
+        'breakdown.regular': 'Regular total',
+        'breakdown.setup.alines': "Aline's setup",
+        'breakdown.monthly.title': 'Monthly Recurring',
+        'breakdown.monthly.alines': "Aline's monthly",
+        'breakdown.usage.title': 'Pay-per-use',
+        'breakdown.usage.note': 'Only billed if/when used. Typical client at your size: $0–$10/mo on overage.',
+        'total.launch': 'Total to launch',
+        'total.launchSub': 'one-time setup',
+        'total.monthly': 'Then monthly',
+        'total.monthlySub': 'per month, everything included',
+        'total.savings': 'Your savings',
+        'total.savingsSub': 'vs. our regular rates',
+        'total.btn.changes': 'Request changes',
+        'total.btn.accept': 'Accept & start building',
+        'total.nextStep.label': 'What happens next',
+        'total.nextStep.body': "Once you accept, we'll review the final quote with you and send a secure payment link for the deposit. Work begins as soon as the deposit is received.",
+        'footer.tagline': 'Prepared exclusively for Aline · Quote valid through June 11, 2026',
+        'footer.questions': 'Questions? Reach out anytime.',
+        'mini.liveTotal': 'Live total',
+        'mini.accept': 'Accept',
+        // dynamic / service labels
+        'svc.website': 'Custom Website + CRM',
+        'svc.care': 'Care Plan',
+        'svc.careIndependent': 'Independent Care Plan — CMS setup',
+        'svc.chatbot': 'AI Chatbot',
+        'svc.receptionist': 'AI Receptionist',
+        'svc.stripe': 'Stripe Payments',
+        'svc.flyers': 'Flyers (500 units)',
+        'svc.cards': 'Business Cards (100)',
+        'svc.usps': 'USPS Door-to-Door',
+        'dyn.quoted': 'Quoted on routes',
+        'cards.title': 'Business Cards — Design',
+        'cards.subtag': 'We design a set of 100 — you choose how to print them.',
+        'cards.desc': 'We design your business cards (set of 100) tailored to your brand and deliver print-ready files. From there it\'s your call: <strong style="color: var(--accent-purple-light)">print them yourself</strong> with any local printer or service like VistaPrint, or <strong style="color: var(--accent-purple-light)">let us order &amp; ship them to you</strong>.',
+        'cards.feat.1': 'Custom design for 100 cards · 2 revisions',
+        'cards.feat.2': 'Print-ready files (PDF + source)',
+        'cards.feat.3': 'Option A — print yourself at cost',
+        'cards.feat.4': 'Option B — we print & ship for you',
+        'cards.designLabel': 'Design',
+        'cards.printLabel': '+ Printing (optional)',
+        'cards.printQty': ' / 100',
+        'cards.printNote': 'Matte / glossy on the low end, foil & soft-touch on the premium end. Skip if you\'d rather print yourself.',
+        'cards.starting': 'Starting at',
+        'cards.viewSamples': 'View sample designs',
+        'cards.samplesCaption': 'Examples of recent designs · click to enlarge',
+        'dyn.stripeFees': '(fees passed through)',
+        'dyn.noServices': 'No services selected.',
+        'dyn.noUsage': 'No usage-based services selected.',
+        'dyn.receptOverage': 'AI Receptionist overage',
+        'dyn.after60': 'After 60 min/mo',
+        'dyn.chatbotOverage': 'AI Chatbot overage',
+        'dyn.after500': 'After 500 chats/mo',
+        'dyn.stripeFeesLabel': 'Stripe fees (paid to Stripe)',
+        'dyn.perTransaction': 'Per transaction',
+        'dyn.cmsSubLabel': 'CMS subscription (paid to provider)',
+        'dyn.cmsSubSub': 'Sanity / Strapi / Directus entry tier',
+      },
+      pt: {
+        'meta.title': 'Skyfynd — Orçamento Personalizado para Aline',
+        'nav.tagline': 'Criativo · Digital · IA',
+        'nav.quoteNum': 'Orçamento #SF-2026-0512-AL',
+        'nav.issued': 'Emitido em 12 de maio de 2026 · Válido por 30 dias',
+        'nav.translate': 'Traduzir',
+        'journey.title': 'A Jornada da Aline Cleaning',
+        'journey.sub': 'Nossa leitura do seu negócio — os serviços enquadrados em cada etapa do seu crescimento.',
+        'journey.tab': 'A Jornada da Aline Cleaning',
+        'journey.now': 'Agora',
+        'journey.next': 'Próximo',
+        'journey.future': 'Futuro',
+        'journey.recsLabel': 'Passos recomendados pela Skyfynd',
+        'journey.p1.title': 'Fase 1 — Fundação',
+        'journey.p1.context': 'Proprietária independente · 17 residências',
+        'journey.p1.g1': 'Registrar LLC',
+        'journey.p1.g2': 'Emitir EIN',
+        'journey.p1.g3': 'Contratar seguro empresarial',
+        'journey.p1.g4': 'Alcançar 40 clientes',
+        'journey.p1.g5': 'Planejar a primeira contratação',
+        'journey.p1.g6': 'Conta bancária empresarial',
+        'journey.p2.title': 'Fase 2 — Crescimento',
+        'journey.p2.context': 'Montando um pequeno time com 30–40 clientes recorrentes',
+        'journey.p2.g1': 'Começar a contratar',
+        'journey.p2.g2': 'Seguro para autônomos (1099) vs. funcionários CLT',
+        'journey.p2.g3': 'Retenção de clientes recorrentes e avaliações',
+        'journey.p3.title': 'Fase 3 — Escala',
+        'journey.p3.context': 'Multirregional & camadas premium',
+        'journey.p3.g1': 'Expandir para áreas vizinhas',
+        'journey.p3.g2': 'Limpeza profunda & saída de imóvel premium',
+        'journey.p3.g3': 'Frota e uniformes com marca',
+        'journey.foot': 'Skyfynd · preparado para a Aline',
+        'hero.promo': 'Promoção de Boas-vindas da Aline',
+        'hero.h1.pre': 'Um plano sob medida para impulsionar a',
+        'hero.intro': 'Olá Aline, preparamos esta proposta personalizada para o seu site com base na nossa conversa. Também sugerimos alguns serviços extras que você pode contratar — agora ou no futuro — para atrair mais clientes, economizar tempo no atendimento ao telefone e fortalecer sua marca online. Você pode ajustar facilmente os serviços abaixo; basta marcar ou desmarcar as caixas para ver como o total muda.',
+        'hero.intro.firstYear': 'Importante: os preços com desconto abaixo são a sua tarifa promocional de boas-vindas para o primeiro ano. As tarifas padrão (riscadas) se aplicam na renovação.',
+        'hero.pill.noCommitment': 'Sem compromisso',
+        'hero.pill.cancel': 'Cancele quando quiser',
+        'hero.pill.launch': 'Lançamento em 2–3 semanas',
+        'foundation.h2': 'Sua base',
+        'foundation.step': 'Passo 1 de 3',
+        'foundation.title': 'Site Personalizado + Painel CRM',
+        'foundation.included': 'Incluído',
+        'foundation.desc': 'Um site dinâmico de 5 a 7 páginas, feito sob medida para o seu serviço de limpeza — serviços, preços, áreas de atuação, agendamento, contato e uma página "Sobre" com a sua história. Inclui um painel privado para você gerenciar informações de clientes, solicitações e agendamentos em um só lugar.',
+        'foundation.feat.1': '5 a 7 páginas dinâmicas',
+        'foundation.feat.2': 'Design mobile-first',
+        'foundation.feat.3': 'Painel CRM',
+        'foundation.feat.4': 'Fundamentos de SEO',
+        'foundation.feat.5': 'Formulários de contato e captação',
+        'foundation.feat.6': 'Hospedagem (1º ano)',
+        'foundation.feat.7': 'SSL + segurança',
+        'foundation.feat.8': 'Configuração de analytics',
+        'foundation.oneTime': 'Investimento único',
+        'foundation.save': 'Você economiza $700',
+        'care.title': 'Plano de Manutenção — Manutenção do Site',
+        'care.recommended': '(recomendado)',
+        'care.desc': 'Edições mensais de conteúdo (até 1 h) · monitoramento de segurança · backups automáticos · hospedagem · SSL · verificação de uptime',
+        'care.choose': 'Escolha sua abordagem de manutenção',
+        'care.pickOne': 'Escolha uma — ou nenhuma',
+        'care.alt1.title': 'Plano de Manutenção Skyfynd',
+        'care.alt1.tag': 'Sem esforço · cuidamos de tudo',
+        'care.alt1.desc': 'Edições mensais de conteúdo (até 1 h) · monitoramento de segurança · backups automáticos · hospedagem · SSL · verificação de uptime. CMS totalmente gerenciado pela Skyfynd — sem taxa de configuração.',
+        'care.alt1.feat.1': 'Até 1 h de edições/mês',
+        'care.alt1.feat.2': 'Hospedagem · SSL · backups inclusos',
+        'care.alt1.feat.3': 'Suporte prioritário · e-mail + WhatsApp',
+        'care.alt1.setupFree': 'Grátis',
+        'care.alt2.title': 'Plano de Manutenção Independente',
+        'care.alt2.tag': 'Você é dono',
+        'care.alt2.subtag': 'CMS headless · Sanity, Strapi ou Directus',
+        'care.alt2.desc': 'Configuramos um CMS headless em seu nome (Sanity, Strapi ou Directus) para você editar páginas, serviços e preços por conta própria. Totalmente independente após o lançamento — você é dono da conta do CMS e paga o provedor diretamente.',
+        'care.alt2.feat.1': 'Edições de conteúdo por conta própria',
+        'care.alt2.feat.2': 'Sua conta · suas credenciais',
+        'care.alt2.feat.3': 'Onboarding e treinamento inclusos',
+        'care.alt2.feat.4': 'Totalmente independente após o lançamento',
+        'care.alt2.cmsSub': 'Assinatura do CMS*',
+        'care.alt2.note': '* Pago diretamente ao seu provedor de CMS — repasse, não cobrado pela Skyfynd.',
+        'common.perMo': '/mês',
+        'common.setup': 'Configuração',
+        'common.monthly': 'Mensal',
+        'common.recommended': 'Recomendado',
+        'common.bilingual': 'Bilíngue (EN + ES)',
+        'addons.h2': 'Complementos recomendados',
+        'addons.step': 'Passo 2 de 3 · ative para incluir',
+        'chatbot.title': 'Chatbot com IA',
+        'chatbot.desc': 'Integrado ao seu site. Responde perguntas frequentes (preços, áreas de atuação, agendamento), captura leads 24/7 e os envia para o seu CRM.',
+        'chatbot.feat.1': 'Treinado nos seus serviços e perguntas frequentes',
+        'chatbot.feat.2': 'Captação de leads → CRM',
+        'chatbot.feat.3': 'Até 500 conversas/mês',
+        'recept.bestRoi': 'Melhor Retorno',
+        'recept.title': 'Recepcionista com IA',
+        'recept.topPick': 'Mais escolhido',
+        'recept.desc': 'Uma IA simpática que soa incrivelmente humana — agenda compromissos, captura novos clientes e nunca perde uma ligação. Dimensionada para o seu volume atual.',
+        'recept.feat.1': '60 minutos/mês incluídos',
+        'recept.feat.2': 'Número local de telefone',
+        'recept.feat.3': 'Agendamento no calendário',
+        'recept.feat.5': 'Caixa postal + transcrições',
+        'recept.overage': 'Excedente',
+        'recept.overageVal': '$0.30/min após 60',
+        'recept.whyMath': 'Por que 60 min é o tamanho certo para a Aline',
+        'stripe.title': 'Pagamentos Online',
+        'stripe.fast': 'Receba mais rápido',
+        'stripe.desc': 'Aceite depósitos e pagamentos online via Stripe. Checkout personalizado integrado ao seu site e ao painel — sem precisar emitir faturas manualmente.',
+        'stripe.feat.1': 'Integração com Stripe Checkout',
+        'stripe.feat.2': 'Links de pagamento de serviço e depósito',
+        'stripe.feat.3': 'Histórico de pagamentos no painel',
+        'stripe.feat.4': 'Automação de reembolsos e recibos',
+        'stripe.fee': 'Tarifa Stripe',
+        'stripe.feeVal': '2,9% + $0.30 / transação*',
+        'stripe.note': '* As tarifas de transação do Stripe são cobradas diretamente pelo Stripe e repassadas pelo custo.',
+        'marketing.h2': 'Materiais de marketing',
+        'marketing.step': 'Passo 3 de 3 · opcional',
+        'flyers.title': 'Folhetos — Design + Impressão',
+        'flyers.desc': '500 folhetos coloridos impressos em papel de qualidade e prontos para distribuir. Design personalizado que combina com a sua marca.',
+        'flyers.feat.1': '500 unidades · totalmente coloridos',
+        'flyers.feat.2': 'Design personalizado · 2 revisões',
+        'flyers.feat.3': 'Impressão + entrega para você',
+        'flyers.startingAt': 'A partir de',
+        'usps.contact': 'Fale conosco',
+        'usps.title': 'Entrega Porta a Porta USPS',
+        'usps.desc': 'Alcance centenas de residências nos bairros que você escolher via USPS Every Door Direct Mail. Cuidamos do roteamento, da documentação e do despacho. O preço depende das rotas selecionadas.',
+        'usps.feat.1': 'Escolha CEPs e rotas-alvo',
+        'usps.feat.2': 'O USPS entrega em cada residência',
+        'usps.feat.3': 'Cuidamos do envio e da documentação',
+        'usps.cta': 'Solicitar orçamento de rotas',
+        'case.title': 'Por que 60 minutos é o tamanho certo para a Aline',
+        'case.sub': 'A conta por trás do seu pacote de Recepcionista com IA',
+        'case.col1.title': 'Estimativa do seu volume de chamadas',
+        'case.col1.l1': 'Novos clientes potenciais (est. 12–15 chamadas/mês · 4 min)',
+        'case.col1.l2': 'Retornos e folga',
+        'case.col1.l3': 'Uso mensal estimado',
+        'case.col1.smart': '<strong>Estratégia inteligente de minutos:</strong> o número da Recepcionista com IA é reservado <em>apenas para novos clientes potenciais</em>. Quando um lead converte, você o transfere para o seu número pessoal — assim, clientes existentes e ligações de saída nunca consomem seus minutos mensais.',
+        'case.col1.note': 'Se ultrapassar 60 min, o excedente é apenas $0.30/min — e te movemos para o próximo plano se fizer sentido.',
+        'case.col2.title': 'O que entra em um minuto de chamada',
+        'case.col2.l1': 'Twilio entrada (número local)',
+        'case.col2.l2': 'Motor de voz Retell AI',
+        'case.col2.l3': 'LLM (GPT-5 nano)',
+        'case.col2.l4': 'Voz TTS padrão',
+        'case.col2.total': 'Custo real por minuto',
+        'case.col2.note': 'Cuidamos de toda a cobrança dos fornecedores — você paga uma única mensalidade fixa, sem faturas surpresa da Twilio ou Retell.',
+        'breakdown.h2': 'Seu investimento, em três partes',
+        'breakdown.setup.title': 'Configuração Única',
+        'breakdown.regular': 'Total padrão',
+        'breakdown.setup.alines': 'Configuração da Aline',
+        'breakdown.monthly.title': 'Mensalidade Recorrente',
+        'breakdown.monthly.alines': 'Mensalidade da Aline',
+        'breakdown.usage.title': 'Pagamento por uso',
+        'breakdown.usage.note': 'Cobrado apenas se/quando usado. Cliente típico do seu porte: $0–$10/mês de excedente.',
+        'total.launch': 'Total para lançar',
+        'total.launchSub': 'configuração única',
+        'total.monthly': 'Depois, mensalmente',
+        'total.monthlySub': 'por mês, tudo incluso',
+        'total.savings': 'Sua economia',
+        'total.savingsSub': 'vs. nossas tarifas normais',
+        'total.btn.changes': 'Solicitar alterações',
+        'total.btn.accept': 'Aceitar & começar',
+        'total.nextStep.label': 'Próximos passos',
+        'total.nextStep.body': 'Assim que você aceitar, revisamos o orçamento final com você e enviamos um link seguro para o pagamento do depósito. O trabalho começa assim que o depósito for confirmado.',
+        'footer.tagline': 'Preparado exclusivamente para a Aline · Orçamento válido até 11 de junho de 2026',
+        'footer.questions': 'Tem dúvidas? Fale com a gente quando quiser.',
+        'mini.liveTotal': 'Total ao vivo',
+        'mini.accept': 'Aceitar',
+        // dynamic / service labels
+        'svc.website': 'Site Personalizado + CRM',
+        'svc.care': 'Plano de Manutenção',
+        'svc.careIndependent': 'Plano Independente — Setup do CMS',
+        'svc.chatbot': 'Chatbot com IA',
+        'svc.receptionist': 'Recepcionista com IA',
+        'svc.stripe': 'Pagamentos Stripe',
+        'svc.flyers': 'Folhetos (500 un.)',
+        'svc.cards': 'Cartões de Visita (100)',
+        'svc.usps': 'Entrega Porta a Porta USPS',
+        'dyn.quoted': 'Sob orçamento',
+        'cards.title': 'Cartões de Visita — Design',
+        'cards.subtag': 'Desenhamos um set de 100 — você escolhe como imprimir.',
+        'cards.desc': 'Desenhamos seus cartões de visita (set de 100) sob medida para a sua marca e entregamos os arquivos prontos para impressão. A partir daí, a escolha é sua: <strong style="color: var(--accent-purple-light)">imprima por conta própria</strong> em qualquer gráfica ou serviço como o VistaPrint, ou <strong style="color: var(--accent-purple-light)">deixe que a gente faça o pedido e envie para você</strong>.',
+        'cards.feat.1': 'Design personalizado para 100 cartões · 2 revisões',
+        'cards.feat.2': 'Arquivos prontos para impressão (PDF + fonte)',
+        'cards.feat.3': 'Opção A — imprima por conta própria pelo custo',
+        'cards.feat.4': 'Opção B — nós imprimimos e enviamos para você',
+        'cards.designLabel': 'Design',
+        'cards.printLabel': '+ Impressão (opcional)',
+        'cards.printQty': ' / 100',
+        'cards.printNote': 'Fosco / brilho na opção básica, hot stamping e soft-touch na premium. Pule se preferir imprimir por conta própria.',
+        'cards.starting': 'A partir de',
+        'cards.viewSamples': 'Ver designs de exemplo',
+        'cards.samplesCaption': 'Exemplos de designs recentes · clique para ampliar',
+        'dyn.stripeFees': '(tarifas repassadas)',
+        'dyn.noServices': 'Nenhum serviço selecionado.',
+        'dyn.noUsage': 'Nenhum serviço de uso selecionado.',
+        'dyn.receptOverage': 'Excedente da Recepcionista com IA',
+        'dyn.after60': 'Após 60 min/mês',
+        'dyn.chatbotOverage': 'Excedente do Chatbot com IA',
+        'dyn.after500': 'Após 500 conversas/mês',
+        'dyn.stripeFeesLabel': 'Tarifas Stripe (pagas ao Stripe)',
+        'dyn.perTransaction': 'Por transação',
+        'dyn.cmsSubLabel': 'Assinatura do CMS (paga ao provedor)',
+        'dyn.cmsSubSub': 'Plano inicial Sanity / Strapi / Directus',
+      },
+    };
+
+    let currentLang = 'en';
+    const t = (key) => (i18n[currentLang] && i18n[currentLang][key]) || (i18n.en[key] ?? key);
+
+    function applyLang(lang) {
+      if (!i18n[lang]) return;
+      currentLang = lang;
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const v = t(key);
+        if (v != null) el.textContent = v;
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        const v = t(key);
+        if (v != null) el.innerHTML = v;
+      });
+
+      document.title = t('meta.title');
+
+      document.querySelectorAll('.lang-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.lang === lang);
+      });
+
+      recalc();
+      lucide.createIcons();
+    }
+
+    document.querySelectorAll('.lang-pill').forEach(p => {
+      p.addEventListener('click', () => applyLang(p.dataset.lang));
+    });
+
+    // ===== Journey panel toggle =====
+    (function () {
+      const panel = document.getElementById('journey-panel');
+      const tab = document.getElementById('journey-tab');
+      const closeBtn = document.getElementById('journey-close');
+      if (!panel || !tab || !closeBtn) return;
+      function setOpen(open) {
+        panel.classList.toggle('collapsed', !open);
+        document.body.classList.toggle('journey-collapsed', !open);
+        tab.classList.toggle('visible', !open);
+      }
+      closeBtn.addEventListener('click', () => setOpen(false));
+      tab.addEventListener('click', () => setOpen(true));
+
+      // Per-section collapse (click header to toggle)
+      document.querySelectorAll('.phase-section-header').forEach(h => {
+        h.addEventListener('click', () => {
+          h.closest('.phase-section').classList.toggle('collapsed');
+        });
+      });
+    })();
+
+    // ===== Case study expand from AI Receptionist card =====
+    (function () {
+      const panel = document.getElementById('case-study');
+      if (!panel) return;
+      function setOpen(open) {
+        panel.classList.toggle('open', open);
+        panel.setAttribute('aria-hidden', String(!open));
+        document.querySelectorAll('[data-toggle-case]').forEach(t => {
+          t.classList.toggle('active', open);
+          t.setAttribute('aria-expanded', String(open));
+        });
+        if (open) {
+          setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 120);
+        }
+      }
+      document.querySelectorAll('[data-toggle-case]').forEach(t => {
+        t.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
+      });
+      document.querySelectorAll('[data-close-case]').forEach(c => {
+        c.addEventListener('click', () => setOpen(false));
+      });
+    })();
+
+    // ===== Business-card samples expansion + lightbox =====
+    (function () {
+      const panel = document.getElementById('cards-samples');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      if (!panel) return;
+
+      document.querySelectorAll('[data-toggle-samples]').forEach(t => {
+        t.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const open = !panel.classList.contains('open');
+          panel.classList.toggle('open', open);
+          panel.setAttribute('aria-hidden', String(!open));
+          t.classList.toggle('active', open);
+          t.setAttribute('aria-expanded', String(open));
+        });
+      });
+
+      if (lightbox && lightboxImg) {
+        document.querySelectorAll('[data-lightbox-src]').forEach(a => {
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            lightboxImg.src = a.dataset.lightboxSrc;
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+          });
+        });
+        const close = () => {
+          lightbox.classList.remove('open');
+          lightbox.setAttribute('aria-hidden', 'true');
+          lightboxImg.src = '';
+        };
+        lightbox.addEventListener('click', close);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      }
+    })();
+
+    // ===== Pricing logic =====
     const services = {
-      website:      { included: true,  setup: 500,  setupRegular: 1200, monthly: 0,   monthlyRegular: 0,   label: 'Custom Website + CRM' },
-      care:         { included: true,  setup: 0,    setupRegular: 0,    monthly: 39,  monthlyRegular: 79,  label: 'Care Plan' },
-      chatbot:      { included: true,  setup: 149,  setupRegular: 349,  monthly: 25,  monthlyRegular: 49,  label: 'AI Chatbot' },
-      receptionist: { included: true,  setup: 149,  setupRegular: 299,  monthly: 79,  monthlyRegular: 129, label: 'AI Receptionist' },
-      stripe:       { included: true,  setup: 99,   setupRegular: 249,  monthly: 0,   monthlyRegular: 0,   label: 'Stripe Payments' },
-      flyers:       { included: false, setup: 99,   setupRegular: 99,   monthly: 0,   monthlyRegular: 0,   label: 'Flyers (500 units)' },
+      website:           { included: true,  setup: 500,  setupRegular: 1200, monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.website' },
+      care:              { included: true,  setup: 0,    setupRegular: 0,    monthly: 39,  monthlyRegular: 79,  labelKey: 'svc.care' },
+      careIndependent:   { included: false, setup: 200,  setupRegular: 350,  monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.careIndependent' },
+      chatbot:      { included: false, setup: 149,  setupRegular: 349,  monthly: 25,  monthlyRegular: 49,  labelKey: 'svc.chatbot' },
+      receptionist: { included: false, setup: 149,  setupRegular: 299,  monthly: 79,  monthlyRegular: 129, labelKey: 'svc.receptionist' },
+      stripe:       { included: false, setup: 99,   setupRegular: 249,  monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.stripe' },
+      cards:        { included: false, setup: 100,  setupRegular: 100,  monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.cards' },
+      flyers:       { included: false, setup: 99,   setupRegular: 99,   monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.flyers' },
+      usps:         { included: false, setup: 0,    setupRegular: 0,    monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.usps', quoted: true },
     };
 
     const fmt = n => '$' + n.toLocaleString('en-US');
@@ -584,50 +1831,57 @@
     function recalc() {
       let setupTotal = 0, setupRegular = 0, monthlyTotal = 0, monthlyRegular = 0;
       const setupLines = [], monthlyLines = [];
+      const perMo = t('common.perMo');
 
       Object.entries(services).forEach(([key, s]) => {
         if (!s.included) return;
+        const label = t(s.labelKey);
+        if (s.quoted) {
+          setupLines.push(`<div class="line-item"><span class="line-label">${label}</span><span class="line-value price-tag" style="color: var(--accent-purple-light)">${t('dyn.quoted')}</span></div>`);
+          return;
+        }
         if (s.setup > 0 || s.setupRegular > 0) {
           setupTotal += s.setup;
           setupRegular += s.setupRegular;
-          setupLines.push(`<div class="line-item"><span class="line-label">${s.label}</span><span class="line-value price-tag">${fmt(s.setup)}</span></div>`);
+          setupLines.push(`<div class="line-item"><span class="line-label">${label}</span><span class="line-value price-tag">${fmt(s.setup)}</span></div>`);
         }
         if (s.monthly > 0 || s.monthlyRegular > 0) {
           monthlyTotal += s.monthly;
           monthlyRegular += s.monthlyRegular;
-          const label = key === 'stripe' ? `${s.label} <span class="text-[var(--text-muted)] text-xs">(fees passed through)</span>` : s.label;
-          monthlyLines.push(`<div class="line-item"><span class="line-label">${label}</span><span class="line-value price-tag">${s.monthly === 0 ? '$0' : fmt(s.monthly) + '/mo'}</span></div>`);
+          const decoratedLabel = key === 'stripe' ? `${label} <span class="text-[var(--text-muted)] text-xs">${t('dyn.stripeFees')}</span>` : label;
+          monthlyLines.push(`<div class="line-item"><span class="line-label">${decoratedLabel}</span><span class="line-value price-tag">${s.monthly === 0 ? '$0' : fmt(s.monthly) + perMo}</span></div>`);
         }
       });
 
-      // Usage column — always show, contextualized
       const usageLines = [];
       if (services.receptionist.included) {
-        usageLines.push(`<div><div class="text-xs text-[var(--text-muted)] mb-1">AI Receptionist overage</div><div class="flex justify-between items-baseline text-sm"><span class="text-[var(--text-secondary)]">After 60 min/mo</span><span class="font-semibold price-tag">$0.30/min</span></div></div>`);
+        usageLines.push(`<div><div class="text-xs text-[var(--text-muted)] mb-1">${t('dyn.receptOverage')}</div><div class="flex justify-between items-baseline text-sm"><span class="text-[var(--text-secondary)]">${t('dyn.after60')}</span><span class="font-semibold price-tag">$0.30/min</span></div></div>`);
       }
       if (services.chatbot.included) {
-        usageLines.push(`<div><div class="text-xs text-[var(--text-muted)] mb-1">AI Chatbot overage</div><div class="flex justify-between items-baseline text-sm"><span class="text-[var(--text-secondary)]">After 500 chats/mo</span><span class="font-semibold price-tag">$0.05/chat</span></div></div>`);
+        usageLines.push(`<div><div class="text-xs text-[var(--text-muted)] mb-1">${t('dyn.chatbotOverage')}</div><div class="flex justify-between items-baseline text-sm"><span class="text-[var(--text-secondary)]">${t('dyn.after500')}</span><span class="font-semibold price-tag">$0.05/chat</span></div></div>`);
       }
       if (services.stripe.included) {
-        usageLines.push(`<div><div class="text-xs text-[var(--text-muted)] mb-1">Stripe fees (paid to Stripe)</div><div class="flex justify-between items-baseline text-sm"><span class="text-[var(--text-secondary)]">Per transaction</span><span class="font-semibold price-tag">2.9% + $0.30</span></div></div>`);
+        usageLines.push(`<div><div class="text-xs text-[var(--text-muted)] mb-1">${t('dyn.stripeFeesLabel')}</div><div class="flex justify-between items-baseline text-sm"><span class="text-[var(--text-secondary)]">${t('dyn.perTransaction')}</span><span class="font-semibold price-tag">2.9% + $0.30</span></div></div>`);
+      }
+      if (services.careIndependent.included) {
+        usageLines.push(`<div><div class="text-xs text-[var(--text-muted)] mb-1">${t('dyn.cmsSubLabel')}</div><div class="flex justify-between items-baseline text-sm"><span class="text-[var(--text-secondary)]">${t('dyn.cmsSubSub')}</span><span class="font-semibold price-tag">~$20${t('common.perMo')}</span></div></div>`);
       }
       if (usageLines.length === 0) {
-        usageLines.push(`<div class="text-sm text-[var(--text-muted)] italic">No usage-based services selected.</div>`);
+        usageLines.push(`<div class="text-sm text-[var(--text-muted)] italic">${t('dyn.noUsage')}</div>`);
       }
 
-      document.getElementById('setup-lines').innerHTML = setupLines.join('') || '<div class="text-sm text-[var(--text-muted)] italic">No services selected.</div>';
-      document.getElementById('monthly-lines').innerHTML = monthlyLines.join('') || '<div class="text-sm text-[var(--text-muted)] italic">No services selected.</div>';
+      document.getElementById('setup-lines').innerHTML = setupLines.join('') || `<div class="text-sm text-[var(--text-muted)] italic">${t('dyn.noServices')}</div>`;
+      document.getElementById('monthly-lines').innerHTML = monthlyLines.join('') || `<div class="text-sm text-[var(--text-muted)] italic">${t('dyn.noServices')}</div>`;
       document.getElementById('usage-lines').innerHTML = usageLines.join('');
 
       document.getElementById('setup-total').textContent = fmt(setupTotal);
       document.getElementById('setup-regular').textContent = fmt(setupRegular);
-      document.getElementById('monthly-total').textContent = fmt(monthlyTotal) + '/mo';
-      document.getElementById('monthly-regular').textContent = fmt(monthlyRegular) + '/mo';
+      document.getElementById('monthly-total').textContent = fmt(monthlyTotal) + perMo;
+      document.getElementById('monthly-regular').textContent = fmt(monthlyRegular) + perMo;
 
       document.getElementById('grand-setup').textContent = fmt(setupTotal);
       document.getElementById('grand-monthly').textContent = fmt(monthlyTotal);
 
-      // Savings = (setup regular - setup) + 12 months * (monthly regular - monthly)
       const savings = (setupRegular - setupTotal) + 12 * (monthlyRegular - monthlyTotal);
       document.getElementById('grand-savings').textContent = fmt(savings);
 
@@ -635,15 +1889,30 @@
       document.getElementById('mini-monthly').textContent = fmt(monthlyTotal);
     }
 
+    function setServiceState(key, included) {
+      if (!services[key]) return;
+      services[key].included = included;
+      const toggleEl = document.querySelector(`[data-toggle="${key}"]`);
+      if (toggleEl) {
+        toggleEl.classList.toggle('on', included);
+        toggleEl.setAttribute('aria-checked', String(included));
+      }
+      const card = document.querySelector(`[data-service="${key}"]`);
+      if (card) card.classList.toggle('card-selected', included);
+    }
+
+    // Mutually exclusive care plan options
+    const carePair = { care: 'careIndependent', careIndependent: 'care' };
+
     document.querySelectorAll('[data-toggle]').forEach(el => {
       el.addEventListener('click', () => {
         const key = el.dataset.toggle;
         if (!services[key]) return;
-        services[key].included = !services[key].included;
-        el.classList.toggle('on');
-        el.setAttribute('aria-checked', String(services[key].included));
-        const card = el.closest('[data-service]');
-        if (card) card.classList.toggle('card-selected', services[key].included);
+        const nextState = !services[key].included;
+        setServiceState(key, nextState);
+        if (nextState && carePair[key]) {
+          setServiceState(carePair[key], false);
+        }
         recalc();
       });
     });
