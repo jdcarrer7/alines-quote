@@ -230,7 +230,7 @@
       opacity: 1;
       margin-top: 14px;
     }
-    .samples-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+    .samples-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(95px, 1fr)); }
     .sample-thumb {
       position: relative; display: block;
       border-radius: 10px; overflow: hidden;
@@ -1140,6 +1140,27 @@
           <span class="text-[var(--text-secondary)] text-sm" data-i18n="flyers.startingAt">Starting at</span>
           <span class="text-2xl font-bold price-tag">$99</span>
         </div>
+
+        <button class="samples-trigger" data-toggle-samples aria-expanded="false" aria-controls="flyers-samples">
+          <i data-lucide="image" class="w-3.5 h-3.5"></i>
+          <span data-i18n="flyers.viewSamples">View sample designs</span>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5 samples-chev"></i>
+        </button>
+
+        <div id="flyers-samples" class="samples-expand" aria-hidden="true">
+          <div class="samples-grid">
+            <a class="sample-thumb" data-lightbox-src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/flyer-1.jpg">
+              <img src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/flyer-1.jpg" alt="Flyer sample 1" loading="lazy" />
+            </a>
+            <a class="sample-thumb" data-lightbox-src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/flyer-2.jpg">
+              <img src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/flyer-2.jpg" alt="Flyer sample 2" loading="lazy" />
+            </a>
+            <a class="sample-thumb" data-lightbox-src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/flyer-3.jpg">
+              <img src="https://f004.backblazeb2.com/file/solidrock-assets/alines-contract/flyer-3.jpg" alt="Flyer sample 3" loading="lazy" />
+            </a>
+          </div>
+          <p class="samples-caption" data-i18n="flyers.samplesCaption">Examples of recent flyer designs · click to enlarge</p>
+        </div>
       </div>
 
       <!-- USPS Door-to-Door -->
@@ -1579,6 +1600,8 @@
         'cards.starting': 'Starting at',
         'cards.viewSamples': 'View sample designs',
         'cards.samplesCaption': 'Examples of recent designs · click to enlarge',
+        'flyers.viewSamples': 'View sample designs',
+        'flyers.samplesCaption': 'Examples of recent flyer designs · click to enlarge',
         'dyn.stripeFees': '(fees passed through)',
         'dyn.noServices': 'No services selected.',
         'dyn.noUsage': 'No usage-based services selected.',
@@ -1781,6 +1804,8 @@
         'cards.starting': 'A partir de',
         'cards.viewSamples': 'Ver designs de exemplo',
         'cards.samplesCaption': 'Exemplos de designs recentes · clique para ampliar',
+        'flyers.viewSamples': 'Ver designs de exemplo',
+        'flyers.samplesCaption': 'Exemplos de designs recentes de folhetos · clique para ampliar',
         'dyn.stripeFees': '(tarifas repassadas)',
         'dyn.noServices': 'Nenhum serviço selecionado.',
         'dyn.noUsage': 'Nenhum serviço de uso selecionado.',
@@ -1884,14 +1909,15 @@
       });
     })();
 
-    // ===== Business-card samples expansion + lightbox =====
+    // ===== Sample-design expandable panels + lightbox =====
     (function () {
-      const panel = document.getElementById('cards-samples');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
-      if (!panel) return;
 
       document.querySelectorAll('[data-toggle-samples]').forEach(t => {
+        const panelId = t.getAttribute('aria-controls');
+        const panel = panelId ? document.getElementById(panelId) : null;
+        if (!panel) return;
         t.addEventListener('click', (e) => {
           e.stopPropagation();
           const open = !panel.classList.contains('open');
