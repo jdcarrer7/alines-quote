@@ -267,7 +267,22 @@
       transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
     }
     .journey-panel.collapsed { transform: translateX(-100%); }
-    @media (max-width: 1279px) { .journey-panel { display: none; } }
+    @media (max-width: 1279px) {
+      .journey-panel { width: min(86vw, 320px); box-shadow: 24px 0 60px rgba(0,0,0,0.6); z-index: 60; }
+    }
+    /* Backdrop — only used on mobile/tablet when drawer is open */
+    #journey-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+      z-index: 55;
+    }
+    @media (max-width: 1279px) {
+      .journey-panel:not(.collapsed) ~ #journey-backdrop { opacity: 1; pointer-events: auto; }
+    }
+    @media (min-width: 1280px) { #journey-backdrop { display: none; } }
     /* Subtle vertical accent line along the right edge */
     .journey-panel::after {
       content: '';
@@ -479,7 +494,9 @@
     .journey-tab:hover { padding-left: 14px; filter: brightness(1.1); }
     .journey-tab.visible { transform: translateY(-50%) translateX(0); }
     .journey-tab i { writing-mode: horizontal-tb; }
-    @media (max-width: 1279px) { .journey-tab { display: none; } }
+    @media (max-width: 767px) {
+      .journey-tab { padding: 12px 7px; font-size: 10px; }
+    }
 
     /* === Language switcher === */
     .lang-pill {
@@ -507,6 +524,72 @@
       padding: 0 8px 0 4px;
     }
     .lang-label i { color: var(--accent-purple-light); }
+
+    /* ============================ MOBILE TUNING ============================ */
+    @media (max-width: 767px) {
+      body { font-size: 16px; padding-bottom: 80px; }
+
+      /* Nav — keep flags only, drop label + tagline on phones */
+      nav > div { padding-left: 16px; padding-right: 16px; gap: 10px; }
+      .nav-tagline { display: none; }
+      .lang-label { display: none; }
+      .lang-switch { padding: 4px; gap: 4px; background: transparent; border: none; }
+      .lang-pill { width: 40px; height: 40px; font-size: 22px; }
+
+      /* Section spacing — tighter horizontal padding */
+      section, footer { padding-left: 16px !important; padding-right: 16px !important; }
+      section.relative.max-w-6xl { padding-top: 36px; padding-bottom: 24px; }
+
+      /* Hero */
+      .hero-row { flex-wrap: wrap; gap: 12px; }
+      .hero-row img { width: 56px; height: 56px; }
+      .hero-pills { gap: 6px; }
+      .hero-pills .pill { font-size: 10px; padding: 3px 8px; }
+
+      /* Section headers */
+      section h2.font-serif { font-size: 22px; line-height: 1.15; }
+      .text-xs.uppercase.tracking-widest { font-size: 10px; }
+
+      /* Cards — slightly tighter inner padding */
+      .card { border-radius: 14px; }
+      .card.p-7 { padding: 18px; }
+      .card.p-6 { padding: 18px; }
+      .card.p-5 { padding: 16px; }
+      .breakdown-col { padding: 18px !important; }
+
+      /* Foundation hero card — stack price block under feature grid */
+      .md\:text-right.md\:min-w-\[180px\] {
+        width: 100%;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+      .md\:text-right.md\:min-w-\[180px\] .md\:justify-end {
+        justify-content: flex-start;
+      }
+
+      /* Case-study expansion */
+      .case-expand-inner { padding: 18px; border-radius: 14px; }
+      .case-trigger { width: 100%; justify-content: center; }
+
+      /* Totals — big numbers slightly smaller */
+      .text-5xl { font-size: 36px !important; }
+
+      /* Sticky mini-total */
+      .sticky-total { bottom: 12px; padding: 0; }
+      .sticky-total .card { border-radius: 12px; padding: 12px 14px; }
+      .sticky-total .text-lg { font-size: 15px; }
+
+      /* Total CTA buttons stack with gap */
+      section .relative.flex.flex-col.sm\:flex-row { gap: 8px; }
+
+      /* Lightbox padding */
+      .lightbox { padding: 12px; }
+    }
+
+    /* Tablet — keep journey hidden, ensure body has no left-padding */
+    @media (max-width: 1279px) {
+      body { padding-left: 0 !important; }
+    }
   </style>
 </head>
 <body class="min-h-screen">
@@ -606,6 +689,8 @@
     <span data-i18n="journey.tab">Aline's Cleaning Journey</span>
   </button>
 
+  <div id="journey-backdrop" aria-hidden="true"></div>
+
   <!-- ============================ NAV ============================ -->
   <nav class="sticky top-0 z-40" style="border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(10, 10, 11, 0.85); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
@@ -613,7 +698,7 @@
         <img src="skyfynd-logo.png" alt="Skyfynd logo" class="w-10 h-10 flex-shrink-0" style="object-fit:contain;" />
         <div>
           <div class="text-[20px] wordmark">Skyfynd</div>
-          <div class="text-[10px] uppercase tracking-widest text-[var(--text-muted)]" data-i18n="nav.tagline">Creative · Digital · AI</div>
+          <div class="nav-tagline text-[10px] uppercase tracking-widest text-[var(--text-muted)]" data-i18n="nav.tagline">Creative · Digital · AI</div>
         </div>
       </a>
       <div class="flex items-center gap-5">
@@ -1183,13 +1268,16 @@
             <span data-i18n="total.nextStep.body">Once you accept, we'll review the final quote with you and send a secure payment link for the deposit. Work begins as soon as the deposit is received.</span>
           </div>
         </div>
-        <div class="flex flex-col sm:flex-row gap-3 md:flex-shrink-0">
-          <button class="px-6 py-3 rounded-xl border border-white/10 text-[var(--text-secondary)] text-sm font-semibold hover:bg-white/5 transition-all flex items-center gap-2 justify-center">
-            <i data-lucide="message-square" class="w-4 h-4"></i> <span data-i18n="total.btn.changes">Request changes</span>
-          </button>
-          <a href="mailto:carlosmario888@hotmail.com?subject=Accepting%20Skyfynd%20Quote%20%23SF-2026-0512-AL" class="pulse px-7 py-3 rounded-xl text-white text-sm font-semibold flex items-center gap-2 justify-center" style="background: var(--gradient-primary);">
-            <i data-lucide="check" class="w-4 h-4"></i> <span data-i18n="total.btn.accept">Accept & start building</span>
-          </a>
+        <div class="flex flex-col items-end gap-2 md:flex-shrink-0">
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button id="btn-request-changes" type="button" class="px-6 py-3 rounded-xl border border-white/10 text-[var(--text-secondary)] text-sm font-semibold hover:bg-white/5 transition-all flex items-center gap-2 justify-center">
+              <i data-lucide="message-square" class="w-4 h-4"></i> <span data-i18n="total.btn.changes">Request changes</span>
+            </button>
+            <button id="btn-accept" type="button" class="pulse px-7 py-3 rounded-xl text-white text-sm font-semibold flex items-center gap-2 justify-center" style="background: var(--gradient-primary);">
+              <i data-lucide="check" class="w-4 h-4"></i> <span data-i18n="total.btn.accept">Accept & start building</span>
+            </button>
+          </div>
+          <p id="submit-status" class="text-xs leading-snug text-right max-w-md" role="status" aria-live="polite"></p>
         </div>
       </div>
     </div>
@@ -1207,7 +1295,8 @@
       </div>
       <div class="text-xs text-[var(--text-muted)] text-right">
         <p data-i18n="footer.questions">Questions? Reach out anytime.</p>
-        <p class="mt-1">carlosmario888@hotmail.com</p>
+        <p class="mt-1"><a href="mailto:contact@skyfynd.io" class="hover:text-[var(--text-secondary)] transition-colors">contact@skyfynd.io</a></p>
+        <p><a href="mailto:carlos@skyfynd.io" class="hover:text-[var(--text-secondary)] transition-colors">carlos@skyfynd.io</a></p>
       </div>
     </div>
   </footer>
@@ -1457,6 +1546,10 @@
         'total.btn.accept': 'Accept & start building',
         'total.nextStep.label': 'What happens next',
         'total.nextStep.body': "Once you accept, we'll review the final quote with you and send a secure payment link for the deposit. Work begins as soon as the deposit is received.",
+        'mail.status.sending': 'Sending…',
+        'mail.status.sent': 'Sent — we got it',
+        'mail.status.successHint': "Thanks! We've received your selection and will reach out shortly with the deposit link.",
+        'mail.status.error': "Couldn't send right now. Please try again, or email contact@skyfynd.io directly.",
         'footer.tagline': 'Prepared exclusively for Aline · Quote valid through June 11, 2026',
         'footer.questions': 'Questions? Reach out anytime.',
         'mini.liveTotal': 'Live total',
@@ -1655,6 +1748,10 @@
         'total.btn.accept': 'Aceitar & começar',
         'total.nextStep.label': 'Próximos passos',
         'total.nextStep.body': 'Assim que você aceitar, revisamos o orçamento final com você e enviamos um link seguro para o pagamento do depósito. O trabalho começa assim que o depósito for confirmado.',
+        'mail.status.sending': 'Enviando…',
+        'mail.status.sent': 'Enviado — recebemos',
+        'mail.status.successHint': 'Obrigada! Recebemos sua seleção e entraremos em contato em breve com o link do depósito.',
+        'mail.status.error': 'Não foi possível enviar agora. Tente novamente ou escreva direto para contact@skyfynd.io.',
         'footer.tagline': 'Preparado exclusivamente para a Aline · Orçamento válido até 11 de junho de 2026',
         'footer.questions': 'Tem dúvidas? Fale com a gente quando quiser.',
         'mini.liveTotal': 'Total ao vivo',
@@ -1736,14 +1833,25 @@
       const panel = document.getElementById('journey-panel');
       const tab = document.getElementById('journey-tab');
       const closeBtn = document.getElementById('journey-close');
+      const backdrop = document.getElementById('journey-backdrop');
       if (!panel || !tab || !closeBtn) return;
       function setOpen(open) {
         panel.classList.toggle('collapsed', !open);
         document.body.classList.toggle('journey-collapsed', !open);
         tab.classList.toggle('visible', !open);
       }
+      // Default state: open on desktop, collapsed on mobile/tablet
+      if (window.matchMedia('(max-width: 1279px)').matches) {
+        setOpen(false);
+      }
       closeBtn.addEventListener('click', () => setOpen(false));
       tab.addEventListener('click', () => setOpen(true));
+      if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && window.matchMedia('(max-width: 1279px)').matches && !panel.classList.contains('collapsed')) {
+          setOpen(false);
+        }
+      });
 
       // Per-section collapse (click header to toggle)
       document.querySelectorAll('.phase-section-header').forEach(h => {
@@ -1916,6 +2024,90 @@
         recalc();
       });
     });
+
+    // ===== Quote submission (server-side notification via Cloudflare Pages Function) =====
+    const QUOTE_ID = 'SF-2026-0512-AL';
+
+    function buildQuotePayload(kind) {
+      const setup = [], monthly = [], usage = [];
+      let setupTotal = 0, setupRegular = 0, monthlyTotal = 0, monthlyRegular = 0;
+      const perMo = t('common.perMo');
+
+      Object.entries(services).forEach(([_, s]) => {
+        if (!s.included) return;
+        const label = t(s.labelKey);
+        if (s.setup > 0 || s.setupRegular > 0) {
+          setup.push({ label, price: s.setup });
+          setupTotal += s.setup; setupRegular += s.setupRegular;
+        }
+        if (s.monthly > 0 || s.monthlyRegular > 0) {
+          monthly.push({ label, price: s.monthly });
+          monthlyTotal += s.monthly; monthlyRegular += s.monthlyRegular;
+        }
+      });
+
+      if (services.receptionist.included)    usage.push({ label: t('dyn.receptOverage'),    detail: `$0.30/min ${t('dyn.after60')}` });
+      if (services.chatbot.included)         usage.push({ label: t('dyn.chatbotOverage'),   detail: `$0.05/chat ${t('dyn.after500')}` });
+      if (services.stripe.included)          usage.push({ label: t('dyn.stripeFeesLabel'),  detail: `2.9% + $0.30 ${t('dyn.perTransaction')}` });
+      if (services.careIndependent.included) usage.push({ label: t('dyn.cmsSubLabel'),      detail: `~$20${perMo}` });
+
+      const savings = (setupRegular - setupTotal) + 12 * (monthlyRegular - monthlyTotal);
+
+      return {
+        kind, quoteId: QUOTE_ID, lang: currentLang,
+        totals: { setup: setupTotal, setupRegular, monthly: monthlyTotal, monthlyRegular, savings },
+        setup, monthly, usage,
+      };
+    }
+
+    function setBtnState(btn, state, label) {
+      if (!btn) return;
+      btn.dataset.state = state;
+      btn.disabled = state === 'sending' || state === 'sent';
+      btn.style.opacity = btn.disabled ? '0.9' : '';
+      btn.style.cursor = btn.disabled ? 'default' : '';
+      const iconName = state === 'sending' ? 'loader-2' : state === 'sent' ? 'check-circle-2' : 'check';
+      const spinClass = state === 'sending' ? ' animate-spin' : '';
+      btn.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4${spinClass}"></i> <span>${label}</span>`;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function showSubmitMessage(text, tone) {
+      const el = document.getElementById('submit-status');
+      if (!el) return;
+      const color = tone === 'error' ? '#fca5a5' : tone === 'success' ? '#6ee7b7' : 'var(--text-muted)';
+      el.style.color = color;
+      el.textContent = text || '';
+    }
+
+    async function submitQuote(kind, btn, originalLabel) {
+      if (btn.dataset.state === 'sending' || btn.dataset.state === 'sent') return;
+      setBtnState(btn, 'sending', t('mail.status.sending'));
+      showSubmitMessage('', 'info');
+
+      try {
+        const r = await fetch('/api/accept', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(buildQuotePayload(kind)),
+        });
+        if (!r.ok) {
+          const err = await r.json().catch(() => ({}));
+          throw new Error(err.error || `HTTP ${r.status}`);
+        }
+        setBtnState(btn, 'sent', t('mail.status.sent'));
+        showSubmitMessage(t('mail.status.successHint'), 'success');
+      } catch (e) {
+        console.error('Quote submission failed:', e);
+        setBtnState(btn, 'idle', originalLabel);
+        showSubmitMessage(t('mail.status.error'), 'error');
+      }
+    }
+
+    const acceptBtn = document.getElementById('btn-accept');
+    const changesBtn = document.getElementById('btn-request-changes');
+    acceptBtn?.addEventListener('click', () => submitQuote('accept', acceptBtn, t('total.btn.accept')));
+    changesBtn?.addEventListener('click', () => submitQuote('changes', changesBtn, t('total.btn.changes')));
 
     recalc();
   </script>
