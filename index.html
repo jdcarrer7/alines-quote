@@ -864,7 +864,7 @@
           <div class="space-y-1.5">
             <div class="flex justify-between items-baseline text-sm">
               <span class="text-[var(--text-secondary)]" data-i18n="common.setup">Setup</span>
-              <span><span class="strike price-tag mr-2">$350</span><span class="font-semibold price-tag">$200</span></span>
+              <span><span class="strike price-tag mr-2">$350</span><span class="font-semibold price-tag">$199</span></span>
             </div>
             <div class="flex justify-between items-baseline text-sm">
               <span class="text-[var(--text-secondary)]" data-i18n="care.alt2.cmsSub">CMS subscription*</span>
@@ -952,21 +952,18 @@
             <span class="text-[var(--text-secondary)]" data-i18n="common.setup">Setup</span>
             <span><span class="strike price-tag mr-2">$299</span><span class="font-semibold price-tag">$149</span></span>
           </div>
-          <div class="flex justify-between items-baseline text-sm">
-            <span class="text-[var(--text-secondary)]" data-i18n="common.monthly">Monthly</span>
-            <span><span class="strike price-tag mr-2">$129</span><span class="font-semibold price-tag">$79</span></span>
+          <div class="flex justify-between items-start text-sm">
+            <span class="text-[var(--text-secondary)] pt-0.5" data-i18n="common.monthly">Monthly</span>
+            <span class="text-right">
+              <span><span class="strike price-tag mr-2">$129</span><span class="font-semibold price-tag">$49</span><span class="text-xs text-[var(--text-muted)]" data-i18n="common.perMo">/mo</span></span>
+              <span class="block text-[11px] text-[var(--accent-purple-light)] mt-0.5" data-i18n="recept.promoNote">for 3 months, then $69/mo</span>
+            </span>
           </div>
           <div class="flex justify-between items-baseline text-xs text-[var(--text-muted)] pt-1">
             <span data-i18n="recept.overage">Overage</span>
             <span class="price-tag" data-i18n="recept.overageVal">$0.30/min after 60</span>
           </div>
         </div>
-
-        <button class="case-trigger" data-toggle-case aria-expanded="false" aria-controls="case-study">
-          <i data-lucide="microscope" class="w-3.5 h-3.5"></i>
-          <span data-i18n="recept.whyMath">Why 60 min is the right size for Aline</span>
-          <i data-lucide="chevron-down" class="w-3.5 h-3.5 case-chev"></i>
-        </button>
       </div>
 
       <!-- Stripe Payments -->
@@ -1090,7 +1087,7 @@
         <div class="space-y-1.5">
           <div class="flex justify-between items-baseline text-sm">
             <span class="text-[var(--text-secondary)]" data-i18n="cards.designLabel">Design</span>
-            <span class="text-2xl font-bold price-tag">$100</span>
+            <span class="text-2xl font-bold price-tag">$99</span>
           </div>
           <div class="flex justify-between items-baseline text-xs">
             <span class="text-[var(--text-muted)]" data-i18n="cards.printLabel">+ Printing (optional)</span>
@@ -1268,7 +1265,7 @@
         <div>
           <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2" data-i18n="total.monthly">Then monthly</div>
           <div class="text-5xl font-bold font-serif gradient-text price-tag" id="grand-monthly">$143</div>
-          <div class="text-sm text-[var(--text-secondary)] mt-1" data-i18n="total.monthlySub">per month, everything included</div>
+          <div class="text-sm text-[var(--text-secondary)] mt-1" data-i18n="total.monthlySub">per month, everything included in the care plan</div>
         </div>
         <div>
           <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2" data-i18n="total.savings">Your savings</div>
@@ -1560,7 +1557,8 @@
         'total.launch': 'Total to launch',
         'total.launchSub': 'one-time setup',
         'total.monthly': 'Then monthly',
-        'total.monthlySub': 'per month, everything included',
+        'total.monthlySub': 'per month, everything included in the care plan',
+        'recept.promoNote': 'for 3 months, then $69/mo',
         'total.savings': 'Your savings',
         'total.savingsSub': 'vs. our regular rates',
         'total.btn.changes': 'Request changes',
@@ -1764,7 +1762,8 @@
         'total.launch': 'Total para lançar',
         'total.launchSub': 'configuração única',
         'total.monthly': 'Depois, mensalmente',
-        'total.monthlySub': 'por mês, tudo incluso',
+        'total.monthlySub': 'por mês, tudo incluso no plano de manutenção',
+        'recept.promoNote': 'por 3 meses, depois $69/mês',
         'total.savings': 'Sua economia',
         'total.savingsSub': 'vs. nossas tarifas normais',
         'total.btn.changes': 'Solicitar alterações',
@@ -1972,11 +1971,11 @@
     const services = {
       website:           { included: true,  setup: 500,  setupRegular: 1200, monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.website' },
       care:              { included: true,  setup: 0,    setupRegular: 0,    monthly: 39,  monthlyRegular: 79,  labelKey: 'svc.care' },
-      careIndependent:   { included: false, setup: 200,  setupRegular: 350,  monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.careIndependent' },
+      careIndependent:   { included: false, setup: 199,  setupRegular: 350,  monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.careIndependent' },
       chatbot:      { included: false, setup: 149,  setupRegular: 349,  monthly: 25,  monthlyRegular: 49,  labelKey: 'svc.chatbot' },
       receptionist: { included: false, setup: 149,  setupRegular: 299,  monthly: 79,  monthlyRegular: 129, labelKey: 'svc.receptionist' },
       stripe:       { included: false, setup: 99,   setupRegular: 249,  monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.stripe' },
-      cards:        { included: false, setup: 100,  setupRegular: 100,  monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.cards' },
+      cards:        { included: false, setup: 99,   setupRegular: 99,   monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.cards' },
       flyers:       { included: false, setup: 99,   setupRegular: 99,   monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.flyers' },
       usps:         { included: false, setup: 0,    setupRegular: 0,    monthly: 0,   monthlyRegular: 0,   labelKey: 'svc.usps', quoted: true },
     };
