@@ -1,0 +1,14 @@
+{
+  "name": "alines-quote",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static interactive quote for Aline — built with Tailwind CSS (CLI build, not CDN)",
+  "scripts": {
+    "build": "tailwindcss -i ./src/tailwind.css -o ./assets/tailwind.css --minify",
+    "watch": "tailwindcss -i ./src/tailwind.css -o ./assets/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}
