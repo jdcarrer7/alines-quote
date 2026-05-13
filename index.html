@@ -590,6 +590,34 @@
     @media (max-width: 1279px) {
       body { padding-left: 0 !important; }
     }
+
+    /* ===== Mobile performance overrides ===== */
+    @media (max-width: 768px) {
+      /* backdrop-filter is the single most expensive thing on mobile GPUs — drop it everywhere */
+      nav, .card, .lightbox, .case-trigger, .journey-panel, .sticky-total, [style*="backdrop-filter"] {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      /* compensate with slightly more opaque backgrounds so the frosted-glass look isn't replaced by transparency */
+      nav { background: rgba(10, 10, 11, 0.96) !important; }
+      .card { background: rgba(17, 17, 19, 0.96) !important; }
+      /* hide the heaviest decorative layer entirely on phones */
+      #starfield .nebula { display: none; }
+      /* tone down the constantly-animating button glow */
+      .pulse { animation: none; box-shadow: 0 0 24px rgba(59, 130, 246, 0.35); }
+    }
+
+    /* ===== Respect reduce-motion / low-power mode ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      #starfield { display: none; }
+      .savings-shimmer { background: none; color: #6ee7b7 !important; -webkit-text-fill-color: #6ee7b7 !important; }
+    }
   </style>
 </head>
 <body class="min-h-screen">
@@ -1344,24 +1372,33 @@
       const root = document.getElementById('starfield');
       if (!root) return;
 
-      const nebulae = [
-        { top:'5%',    right:'5%',  w:400, h:400, bg:'radial-gradient(ellipse at center, rgba(167,139,250,0.08) 0%, rgba(96,175,250,0.04) 40%, transparent 70%)', blur:60, dur:20, delay:0 },
-        { bottom:'10%',left:'0%',   w:500, h:350, bg:'radial-gradient(ellipse at center, rgba(96,175,250,0.06) 0%, rgba(52,211,153,0.03) 40%, transparent 70%)',  blur:70, dur:25, delay:5 },
-        { top:'40%',   left:'30%',  w:300, h:300, bg:'radial-gradient(ellipse at center, rgba(167,139,250,0.04) 0%, rgba(52,211,153,0.02) 50%, transparent 70%)', blur:50, dur:18, delay:10 },
-      ];
-      nebulae.forEach(n => {
-        const d = document.createElement('div');
-        d.className = 'nebula';
-        Object.assign(d.style, {
-          top: n.top || '', right: n.right || '', bottom: n.bottom || '', left: n.left || '',
-          width: n.w + 'px', height: n.h + 'px',
-          background: n.bg, filter: 'blur(' + n.blur + 'px)',
-          animation: 'nebulaShift ' + n.dur + 's ease-in-out infinite ' + n.delay + 's',
-        });
-        root.appendChild(d);
-      });
+      // Bail entirely on small screens or reduce-motion preference — saves a ton of GPU/battery
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) return;
 
-      for (let i = 0; i < 120; i++) {
+      // Nebulae: skip on mobile, lighter blur on desktop
+      if (!isMobile) {
+        const nebulae = [
+          { top:'5%',    right:'5%',  w:400, h:400, bg:'radial-gradient(ellipse at center, rgba(167,139,250,0.08) 0%, rgba(96,175,250,0.04) 40%, transparent 70%)', blur:24, dur:40, delay:0 },
+          { bottom:'10%',left:'0%',   w:500, h:350, bg:'radial-gradient(ellipse at center, rgba(96,175,250,0.06) 0%, rgba(52,211,153,0.03) 40%, transparent 70%)',  blur:28, dur:50, delay:5 },
+          { top:'40%',   left:'30%',  w:300, h:300, bg:'radial-gradient(ellipse at center, rgba(167,139,250,0.04) 0%, rgba(52,211,153,0.02) 50%, transparent 70%)', blur:20, dur:36, delay:10 },
+        ];
+        nebulae.forEach(n => {
+          const d = document.createElement('div');
+          d.className = 'nebula';
+          Object.assign(d.style, {
+            top: n.top || '', right: n.right || '', bottom: n.bottom || '', left: n.left || '',
+            width: n.w + 'px', height: n.h + 'px',
+            background: n.bg, filter: 'blur(' + n.blur + 'px)',
+            animation: 'nebulaShift ' + n.dur + 's ease-in-out infinite ' + n.delay + 's',
+          });
+          root.appendChild(d);
+        });
+      }
+
+      const starCount = isMobile ? 35 : 80;
+      for (let i = 0; i < starCount; i++) {
         const left = (i * 2.73 + i * i * 0.37) % 100;
         const top = 1 + ((i * 17.3 + i * 0.7) % 98);
         const size = 0.8 + (i % 5) * 0.4;
@@ -1382,7 +1419,7 @@
         root.appendChild(s);
       }
 
-      const accents = [
+      const accents = isMobile ? [] : [
         { left:8,  top:12, size:3,   color:'rgba(167,139,250,0.6)',  glow:'rgba(167,139,250,0.3)',  dur:6,   delay:0.5 },
         { left:92, top:25, size:2.5, color:'rgba(96,175,250,0.5)',   glow:'rgba(96,175,250,0.3)',   dur:7,   delay:1.2 },
         { left:45, top:8,  size:2,   color:'rgba(52,211,153,0.4)',   glow:'rgba(52,211,153,0.2)',   dur:5.5, delay:2.3 },
